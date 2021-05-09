@@ -1,0 +1,662 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* modal window styles */
+
+.modal-record {
+    display: none;
+    margin: auto;
+    width: 650px;
+    height: 450px;
+    background-color: #fff;
+    color: #000;
+    font-size: 18px;
+    position: absolute;
+    opacity: 0;
+    transition: opacity .3s;
+    z-index: 1000;
+}
+
+.modal-record .content-modal {
+    width: 100%;
+    height: 100%;
+    padding: 40px 20px 60px 20px;
+    overflow-y: scroll;
+}
+
+.modal-record .record-online {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
+    text-transform: uppercase;
+    background-color: #f75a2f;
+    position: absolute;
+}
+
+.modal-record .record-online span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.modal-record .record-online .fa-times {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+
+.modal-record .result-sum {
+    width: 100%;
+    background-color: #e3e3e3;
+    padding: 8px 20px;
+    z-index: 1;
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.modal-record .selected-time {
+    display: none;
+}
+
+.modal-record .container-services {
+    display: none;
+}
+
+.modal-record .service-card:first-child {
+    padding-top: 0;
+}
+
+.modal-record .service-card:last-child {
+    margin-bottom: 15px;
+}
+
+.modal-record .service-card {
+    padding: 15px 0;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+}
+
+.modal-record .service-card .fa-circle {
+    color: #de8a0b;
+}
+
+.modal-record .selected-services, .text-employee {
+    display: none;
+    font-weight: bold;
+}
+
+.selected-service-txt {
+    padding-left: 15px;
+}
+
+.modal-record .open-list {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.modal-record .open-list .open-employees, .fa-chevron-down {
+    font-size: 14px;
+    padding: 2px 0 0 10px;
+}
+
+.modal-record .name-service {
+    color: #000;
+    text-transform: uppercase;
+}
+
+.modal-record .price-service, .time {
+    display: block;
+    padding-top: 10px;
+}
+
+.modal-record .price-service {
+    color: #f60f36;
+    font-weight: bold;
+}
+
+.modal-record .time {
+    color: #de8a0b;
+}
+
+.block-masters {
+    display: none;
+    padding: 5px;
+}
+
+.open-employees {
+    font-weight: bold;
+    margin: 0;
+}
+
+.block-masters .master:last-child {
+    border-bottom: none;
+}
+
+.block-masters .master {
+    padding: 15px 15px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.block-masters .master:hover {
+    background-color: #eeeeee;
+}
+
+.block-masters .master .name-master {
+    display: block;
+    font-weight: bold;
+}
+
+.block-masters .master .prof {
+    display: block;
+    font-size: 15px;
+}
+
+.block-time {
+    display: flex;
+    flex-wrap: wrap;
+    width: 400px;
+}
+
+.block-time .element-time {
+    margin: 0 15px 15px 0;
+    padding: 5px;
+    animation-name: animateTimeElements;
+    animation-duration: .7s;
+    transition: opacity, background-color, .3s;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.block-time .element-time:hover {
+    background-color: #e3e3e3;
+}
+
+.date-picker, .timing {
+    padding: 15px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.timing {
+    border-bottom: none;
+}
+
+.modal-record .model-btn-record {
+    width: 120px;
+    padding: 5px;
+    margin-top: 60px;
+    border-radius: 6px;
+    background-color: #f75a2f;
+    text-transform: uppercase;
+    color: #fff;
+    border: none;
+    outline: none;
+    transition: background-color .2s;
+}
+
+.modal-record .model-btn-record:hover {
+    background-color: #de522c;
+}
+
+.success-record {
+    font-weight: bold;
+    font-size: 21px;
+}
+
+.bg-image, .bg-image2 {
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: transform, opacity, 1.5s;
+}
+
+.bg-image {
+    background-image: url(../images/background1.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    opacity: 1;
+}
+
+.bg-image2 {
+    background-image: url(../images/background2.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    opacity: 0;
+}
+
+#main {
+    transition: transform .3s;
+}
+
+.title {
+    text-align: center;
+    font-size: 26px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 60px;
+}
+
+#slide-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 50px;
+    right: -200px;
+    cursor: pointer;
+    transition: background-color, right, .4s;
+    z-index: 11;
+}
+
+#slide-top:hover {
+    background-color: #000;
+}
+
+#slide-top:hover .fa-arrow-up {
+    color: #fff;
+    transition: color .3s;
+}
+
+#slide-top .fa-arrow-up {
+    font-size: 30px;
+}
+
+.wrap {
+    margin: 0 auto -60px;
+}
+
+.wrap > .container {
+    padding: 70px 15px 20px;
+}
+
+/* header styles */
+.navbar {
+    height: 140px;
+    border-bottom: 1px solid #bfbfbf;
+    text-transform: uppercase;
+}
+
+.navbar ul, .record {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    margin-top: 80px;
+}
+
+.navbar ul .item-link {
+    margin-right: 20px;
+}
+
+.navbar ul li a {
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    transition: color .2s;
+}
+
+.navbar ul li .main-link:hover {
+    color: #dbdbdb;
+}
+
+.navbar .logo-png {
+    width: 150px;
+    height: 80px;
+    transform: scale(1.2);
+    position: absolute;
+    left: 50%;
+    right: 50%;
+}
+
+.navbar .record {
+    background-color: #f75a2f;
+    padding: 5px;
+    transition: background-color .2s;
+    text-decoration: none;
+    color: #fff;
+}
+
+.navbar .record:hover {
+    background-color: #de522c;
+}
+
+/* general section information */
+.section-content {
+    width: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100vh;
+    background-color: #fff;
+    padding: 60px 0 60px 0;
+    color: #000;
+    font-size: 17px;
+    position: relative;
+    bottom: 80px;
+    transition: transform .5s;
+}
+
+.section-content .title {
+    margin-bottom: 30px;
+}
+
+.section-content .description {
+    min-width: 200px;
+    width: 670px;
+    margin: auto;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #bfbfbf;
+}
+
+.container-record-service {
+    margin-top: 70px;
+}
+
+.list-service {
+    display: inline-block;
+    min-width: 230px;
+    width: 320px;
+}
+
+.list-service p {
+    margin: 0;
+}
+
+.list-service .name-service {
+    border-bottom: 1px solid #bfbfbf;
+    padding: 15px 0;
+}
+
+.list-service .name-service:first-child {
+    padding: 0 0 15px 0;
+}
+
+.list-service .price-service {
+    float: right;
+}
+
+.record-btn {
+    float: right;
+    width: 250px;
+    height: 65px;
+    text-align: center;
+    background-color: #f75a2f;
+    cursor: pointer;
+    transition: background-color .2s;
+}
+
+.record-btn #link-record {
+    line-height: 65px;
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.record-btn:hover {
+    background-color: #de522c;
+}
+
+/* products styles */
+.site-products {
+    width: 100%;
+    margin: 60px 0 60px 0;
+    color: #fff;
+    font-size: 17px;
+    padding-top: 60px;
+    transform: none;
+}
+
+.site-products .section-products {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.site-products p {
+    color: #000;
+}
+
+.site-products .name-products, .description, .price {
+    padding-top: 12px;
+}
+
+.site-products .name-products {
+    color: #000;
+    font-size: 18px;
+}
+
+.site-products .description {
+    width: 250px;
+    margin: auto;
+    color: #000;
+    font-size: 15px;
+}
+
+.site-products .name-products, .price {
+    font-weight: bold;
+}
+
+.site-products .add-cart {
+    display: inline-block;
+    margin-top: 45px;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background, color, .2s;
+    font-size: 15px;
+}
+
+.site-products .add-cart span {
+    display: block;
+    padding: 6px;
+    border: 1px solid #000000;
+}
+
+.site-products .add-cart:hover {
+    color: #fff;
+    background-color: #f75a2f;
+}
+
+.site-products .img-product {
+    width: 280px;
+    height: 320px;
+    transition: transform .2s;
+}
+
+.site-products .products-block {
+    margin: 0 40px 0 40px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.site-products .img-product:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+/* service styles */
+.site-service {
+    width: 100%;
+    height: 100vh;
+    margin: 60px 0 60px 0;
+    color: #fff;
+    font-size: 17px;
+    padding-top: 60px;
+    transform: none;
+}
+
+.site-service .list-services {
+    width: 600px;
+    margin: auto;
+}
+
+.list-services .price-service {
+    float: right;
+}
+
+/* register styles */
+.site-register {
+    margin: 60px 0 60px 0;
+    padding-top: 60px;
+    color: #fff;
+}
+
+.register-form {
+    display: flex;
+    justify-content: center;
+}
+
+.register-form form {
+    width: 650px;
+}
+
+.register-form .btn-register {
+    outline: none;
+    border: none;
+    padding: 5px;
+    background-color: #f75a2f;
+    color: #fff;
+    text-transform: uppercase;
+    transition: background-color .2s;
+}
+
+.register-form .btn-register:hover {
+    background-color: #de522c;
+}
+
+/* footer styles */
+.footer {
+    height: 60px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: /*"\e113"*/ "\e151";
+}
+
+a.desc:after {
+    content: /*"\e114"*/ "\e152";
+}
+
+.sort-numerical a.asc:after {
+    content: "\e153";
+}
+
+.sort-numerical a.desc:after {
+    content: "\e154";
+}
+
+.sort-ordinal a.asc:after {
+    content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+    content: "\e156";
+}
+
+.grid-view th {
+    white-space: nowrap;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+
+/* align the logout "link" (button in form) of the navbar */
+.nav li > form > button.logout {
+    padding: 15px;
+    border: none;
+}
+
+@media(max-width:767px) {
+    .nav li > form > button.logout {
+        display:block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 15px;
+    }
+}
+
+.nav > li > form > button.logout:focus,
+.nav > li > form > button.logout:hover {
+    text-decoration: none;
+}
+
+.nav > li > form > button.logout:focus {
+    outline: none;
+}
+
+@keyframes animateTimeElements {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
