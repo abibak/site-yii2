@@ -29,7 +29,7 @@ $this->title = 'Авторизация';
 
         <?= Html::a('Регистрация', ['/site/register'], ['class' => 'main-link']) ?>
 
-        <?= Html::submitButton('Авторизация', ['class' => 'btn-login']) ?>
+        <?= Html::button('Авторизация', ['class' => 'btn-login']) ?>
 
         <?php ActiveForm::end(); ?>
 

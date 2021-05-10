@@ -103,7 +103,7 @@ class SiteController extends Controller
 
             for ($i = 0; $i < count($data_record['serviceId']); ++$i) {
                 Yii::$app->db->createCommand()->insert('records', [
-                    'client_id' => $data_record['clientId'],
+                    'client_id' => Yii::$app->user->getId(),
                     'hairdresser_id' => $data_record['hairdresserId'],
                     'service_id' => $data_record['serviceId'][$i],
                     'date' => $data_record['date'],
@@ -113,12 +113,12 @@ class SiteController extends Controller
             die();
         }
 
-        $data_employees = Employee::find()->select('id, name, surname')->all();
-        $query = new yii\db\Query();
-        $data_services = $query->from(['e' => 'service_tariffs'])
-            ->join('INNER JOIN', 'services', 'e.service_id = services.id')->all();
+//        $data_employees = Employee::find()->select('id, name, surname')->all();
+//        $query = new yii\db\Query();
+//        $data_services = $query->from(['e' => 'service_tariffs'])
+//            ->join('INNER JOIN', 'services', 'e.service_id = services.id')->all();
 
-        return $this->render('index', ['employees' => $data_employees, 'services' => $data_services]);
+        return $this->render('index');
     }
 
     /**
@@ -136,7 +136,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
 
-        if ($request->isAjax) {
+        if ($model->load($request->post()) && $request->isAjax) {
             $dataFormLogin = $request->post('LoginForm');
 
             $model->phone = $dataFormLogin['phone'];
@@ -148,10 +148,6 @@ class SiteController extends Controller
 
             die();
         }
-
-//        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-//            return $this->goBack();
-//        }
 
         $model->password = '';
         return $this->render('login', [
@@ -242,7 +238,7 @@ class SiteController extends Controller
                 $user->password = Yii::$app->security->generatePasswordHash($model->password);
 
                 if ($user->save()) {
-                    return $this->goHome();
+                    return $this->redirect('/site/login');
                 }
             }
             die();

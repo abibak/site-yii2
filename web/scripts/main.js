@@ -97,16 +97,6 @@ $(function () {
         });
     }
 
-    // отобразить модальное окно с записью
-    $('.record').on('click', function (e) {
-        e.preventDefault();
-
-        modal.show({
-            width: 650,
-            height: 450,
-        });
-    });
-
     // ajax отправка формы регистрации
     $('#form-register').on('submit', function () {
         let data = $(this).serialize();
@@ -116,12 +106,8 @@ $(function () {
             url: '/site/register',
             data: data,
 
-            // success: function (response) {
-            //     console.log(response)
-            // },
-
             fail: function () {
-                console.log('error');
+                $('.register-form').empty().append('<p class="error-register">' + 'Ошибка регистрации' + '</p>');
             }
         });
     });
@@ -144,10 +130,20 @@ $(function () {
         });
     });
 
+    // отобразить модальное окно с записью
+    $('.record').on('click', function (e) {
+        e.preventDefault();
+
+        modal.show({
+            width: 650,
+            height: 450,
+        });
+    });
+
     let modal = (function () {
+
         // объект сбора данных о записи
         let dataRecordObj = {
-            clientId: null,
             hairdresserId: null,
             serviceId: [],
             date: '',
@@ -286,7 +282,7 @@ $(function () {
                     data: 'record=' + JSON.stringify(dataRecordObj),
 
                     beforeSend: function () {
-                        $('.block-time').html('<p>' + 'Загрузка...' + '</p>')
+                        $('.block-time').html('<p>' + 'Отправка...' + '</p>')
                     },
 
                     success: function () {
@@ -315,8 +311,6 @@ $(function () {
             },
 
             show: function (settings) {
-                dataRecordObj.clientId = 1;
-
                 $modal.css({
                     'display': 'block',
                     'width': settings.width,

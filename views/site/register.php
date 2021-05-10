@@ -17,6 +17,8 @@ $this->title = 'Регистрация';
 
     <!-- Register form -->
 
+    <div id="message"><?= Yii::$app->session->getFlash('success-register') ?></div>
+
     <div class="register-form">
         <?php $form = ActiveForm::begin(['id' => 'form-register', 'enableAjaxValidation' => true]) ?>
 
