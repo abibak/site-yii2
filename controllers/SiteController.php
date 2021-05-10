@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use app\models\Services;
 use Yii;
+use yii\base\BaseObject;
+use yii\db\ActiveRecord;
 use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -16,6 +18,7 @@ use app\models\Product;
 use app\models\Employee;
 use app\models\Records;
 use app\models\Clients;
+use yii\widgets\ActiveForm;
 
 class SiteController extends Controller
 {
@@ -125,15 +128,30 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $request = Yii::$app->request;
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
         $model = new LoginForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        if ($request->isAjax) {
+            $dataFormLogin = $request->post('LoginForm');
+
+            $model->phone = $dataFormLogin['phone'];
+            $model->password = $dataFormLogin['password'];
+
+            if ($model->login()) {
+                return $this->redirect('/');
+            }
+
+            die();
         }
+
+//        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+//            return $this->goBack();
+//        }
 
         $model->password = '';
         return $this->render('login', [
@@ -208,19 +226,25 @@ class SiteController extends Controller
             $this->redirect('/');
         }
 
-        if ($model->load($request->post()) && $model->validate()) {
-            $user = new User();
+        if ($request->isAjax && $model->load($request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
-            $user->name = $model->name;
-            $user->surname = $model->surname;
-            $user->patronymic = $model->patronymic;
-            $user->phone = $model->phone;
-            $user->password = Yii::$app->security->generatePasswordHash($model->password);
+        if ($model->load($request->post())) {
+            if ($model->validate()) {
+                $user = new User();
 
-            if ($user->save()) {
-                return $this->goHome();
+                $user->name = $model->name;
+                $user->surname = $model->surname;
+                $user->patronymic = $model->patronymic;
+                $user->phone = $model->phone;
+                $user->password = Yii::$app->security->generatePasswordHash($model->password);
+
+                if ($user->save()) {
+                    return $this->goHome();
+                }
             }
-
             die();
         }
 

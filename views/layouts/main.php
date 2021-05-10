@@ -39,10 +39,13 @@ AppAsset::register($this);
                 <li class="item-link"><?= Html::a('Товары', ['/site/products'], ['class' => 'main-link']) ?></li>
                 <li class="item-link"><?= Html::a('Услуги', ['/site/service'], ['class' => 'main-link']) ?></li>
 
-                <?php if (Yii::$app->user->isGuest) ?>
+                <?php if (Yii::$app->user->isGuest) { ?>
 
-                <li class="item-link"><?= Html::a('Регистрация', ['/site/register'], ['class' => 'main-link']) ?></li>
-                <li class="item-link"><?= Html::a('Выход', ['/site/logout'], ['class' => 'main-link']) ?></li>
+                    <li class="item-link"><?= Html::a('Авторизация', ['/site/login'], ['class' => 'main-link']) ?></li>
+
+                <?php } else { ?>
+                    <li class="item-link"><?= Html::a('Выход', ['/site/logout'], ['class' => 'main-link']) ?></li>
+                <?php } ?>
             </ul>
 
             <?= Html::img('@web/images/logo-white.png', ['class' => 'logo-png', 'alt' => 'Logo']) ?>

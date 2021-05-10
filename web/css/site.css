@@ -8,6 +8,10 @@
 body {
     overflow-x: hidden;
 }
+/* ajax validation */
+.help-block {
+    color: red;
+}
 
 /* modal window styles */
 
@@ -546,6 +550,38 @@ body {
 }
 
 .register-form .btn-register:hover {
+    background-color: #de522c;
+}
+
+/* login styles */
+.site-login {
+    margin: 60px 0 60px 0;
+    padding-top: 60px;
+    color: #fff;
+}
+
+.site-login .login-form {
+    display: flex;
+    justify-content: center;
+}
+
+.site-login .login-form form {
+    width: 650px;
+}
+
+.site-login .btn-login {
+    display: block;
+    outline: none;
+    border: none;
+    padding: 5px;
+    margin-top: 1rem;
+    background-color: #f75a2f;
+    color: #fff;
+    text-transform: uppercase;
+    transition: background-color .2s;
+}
+
+.site-login .btn-login:hover {
     background-color: #de522c;
 }
 

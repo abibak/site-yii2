@@ -15,8 +15,8 @@ class Clients extends Model
     public function rules()
     {
         return [
-            [['name', 'surname', 'patronymic', 'phone', 'password'], 'required', 'message' => 'Заполните поле'],
-            [['phone'], 'unique', 'message' => 'Номер телефона уже используется'],
+            [['name', 'surname', 'patronymic', 'password'], 'required'],
+            ['phone', 'unique', 'targetClass' => 'app\models\User', 'message' => 'Этот номер телефона уже используется'],
             ['name', 'string', 'min' => 2, 'max' => 150],
             ['surname', 'string', 'min' => 2, 'max' => 200],
             ['patronymic', 'string', 'min' => 2, 'max' => 250],

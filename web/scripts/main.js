@@ -116,6 +116,24 @@ $(function () {
             url: '/site/register',
             data: data,
 
+            // success: function (response) {
+            //     console.log(response)
+            // },
+
+            fail: function () {
+                console.log('error');
+            }
+        });
+    });
+
+    $('#form-login').on('submit', function () {
+        let data = $(this).serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: '/site/login',
+            data: data,
+
             success: function (response) {
                 console.log(response)
             },
@@ -123,8 +141,8 @@ $(function () {
             fail: function () {
                 console.log('error');
             }
-        })
-    })
+        });
+    });
 
     let modal = (function () {
         // объект сбора данных о записи
