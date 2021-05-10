@@ -134,6 +134,9 @@ $(function () {
     $('.record').on('click', function (e) {
         e.preventDefault();
 
+        $('html').css('overflow', 'hidden');
+        $('.bg-main').css('opacity', '1');
+
         modal.show({
             width: 650,
             height: 450,
@@ -282,7 +285,7 @@ $(function () {
                     data: 'record=' + JSON.stringify(dataRecordObj),
 
                     beforeSend: function () {
-                        $('.block-time').html('<p>' + 'Отправка...' + '</p>')
+                        $('.block-time').html('<p>' + 'Отправка...' + '</p>');
                     },
 
                     success: function () {
@@ -323,6 +326,9 @@ $(function () {
 
             close: function () {
                 $modal.hide();
+
+                $('html').css('overflow', 'visible');
+                $('.bg-main').css('opacity', '0');
             }
         }
     })();

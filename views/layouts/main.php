@@ -32,18 +32,19 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
+<!-- modal record -->
 <div class="modal-record">
-        <div class="record-online">
-            <span>Запись онлайн <i class="fas fa-times close-modal"></i></span>
-        </div>
+    <div class="record-online">
+        <span>Запись онлайн <i class="fas fa-times close-modal"></i></span>
+    </div>
 
-        <div class="content-modal">
-            <?php if (Yii::$app->user->isGuest) { ?>
+    <div class="content-modal">
+        <?php if (Yii::$app->user->isGuest) { ?>
 
-                <p>Для того, чтобы записаться онлайн,
-                    нужно <?= Html::a('войти', '/site/login', ['class' => 'model-link-login']) ?> в аккаунт</p>
+            <p>Для того, чтобы записаться онлайн,
+                нужно <?= Html::a('войти', '/site/login', ['class' => 'model-link-login']) ?> в аккаунт</p>
 
-            <?php } else { ?>
+        <?php } else { ?>
 
             <p class="text-employee">Выбранный сотрудник</p>
             <div class="selected-master"></div>
@@ -96,14 +97,20 @@ AppAsset::register($this);
             </div>
 
             <button class="model-btn-record">Записаться</button>
-            <?php } ?>
-        </div>
+        <?php } ?>
+    </div>
 
-        <div class="result-sum">
-            <span>Выбрано (<span class="number">0</span>)</span>
-            <span><span class="sum">0</span> Р. </span>
-            <span class="selected-time">Время: <span class="result-time-show"></span></span>
-        </div>
+    <div class="result-sum">
+        <span>Выбрано (<span class="number">0</span>)</span>
+        <span><span class="sum">0</span> Р. </span>
+        <span class="selected-time">Время: <span class="result-time-show"></span></span>
+    </div>
+</div>
+
+<div class="modal-cart">
+    <div class="container-cart">
+        <p>Корзина покупок</p>
+    </div>
 </div>
 
 <div class="bg-main"></div>
