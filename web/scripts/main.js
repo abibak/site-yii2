@@ -135,7 +135,7 @@ $(function () {
         e.preventDefault();
 
         $('html').css('overflow', 'hidden');
-        $('.bg-main').css('opacity', '1');
+        $('.bg-main').css({'opacity': 1, 'z-index': 1});
 
         modal.show({
             width: 650,
@@ -328,8 +328,97 @@ $(function () {
                 $modal.hide();
 
                 $('html').css('overflow', 'visible');
-                $('.bg-main').css('opacity', '0');
+                $('.bg-main').css({'opacity': 0, 'z-index': -1});
             }
         }
     })();
+
+    $('.shopping-cart').on('click', function () {
+       modalCart.show({
+           width: 650,
+           height: 450,
+       });
+    });
+
+    let modalCart = (function () {
+        function getProducts() {
+            return JSON.parse(localStorage.getItem('b-cart'));
+        }
+
+        function setProductData(data) {
+            localStorage.setItem('b-cart', JSON.stringify(data));
+        }
+
+        let $modalCart = $('.modal-cart');
+        let $product = $('.add-cart');
+
+        let cart = getProducts() || {};
+
+        cart = {
+            amount: 0,
+            products: [],
+            total: 0,
+        }
+
+        $product.on('click', function () {
+            let $parent = $(this).parent('.products-block');
+
+            let idProduct = parseInt($parent.attr('data-id-product'));
+            let nameProduct = $parent.children('.name-products').text();
+            let priceProduct = $parent.children('.price').text();
+            let imgProduct = $parent.children('.img-product').attr('src');
+
+            for (let currentProduct of cart.products) {
+                if (idProduct === currentProduct.id) {
+                    currentProduct.count += 1;
+                    currentProduct.amount = currentProduct.price * currentProduct.count;
+                    cart.total++;
+
+                    setProductData(cart);
+                    return;
+                }
+            }
+
+            cart.products.push({
+                id: parseInt(idProduct),
+                name: nameProduct,
+                img: imgProduct,
+                count: 1,
+                price: parseInt(priceProduct),
+                amount: parseInt(priceProduct),
+            });
+
+            cart.total++;
+
+            setProductData(cart);
+        });
+
+        return {
+            center: function () {
+                let center = ($(window).width() - $modalCart.width()) / 2;
+
+                $modalCart.css({
+                    'top': 150,
+                    'left': center,
+                })
+            },
+
+            show: function (settings) {
+                $modalCart.css({
+                    'width': settings.width,
+                    'height': settings.height,
+                });
+                modalCart.center();
+                $(window).on('resize', modalCart.center);
+            },
+
+            close: function () {
+                // code close modal cart
+            },
+        }
+
+    })();
+
+
+
 });

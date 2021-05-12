@@ -117,6 +117,7 @@ AppAsset::register($this);
 <div id="fx-background" class="active bg-image"></div>
 <div class="bg-image2"></div>
 <div id="slide-top"><i class="fas fa-arrow-up"></i></div>
+<div class="shopping-cart"><i class="fas fa-shopping-cart"></i> <span class="quantity-in-cart"></span></div>
 
 <!-- main content -->
 <div id="main">
