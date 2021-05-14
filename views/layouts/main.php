@@ -116,7 +116,7 @@ AppAsset::register($this);
         <div class="order-list"></div>
 
         <div class="result-sum">
-            <span class="sum">Сумма: <span class="sum-products"></span></span>
+            <span class="sum">Сумма: <span class="sum-products"></span> р.</span>
         </div>
     </div>
 </div>

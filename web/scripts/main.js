@@ -335,11 +335,14 @@ $(function () {
 
     checkNumberCart();
 
-    function checkNumberCart() {
+    function checkNumberCart(total) {
         if (!localStorage.getItem('b-cart')) {
             $('.shopping-cart').css('display', 'none');
+            return false;
         } else {
             $('.shopping-cart').css('display', 'block');
+            $('.quantity-in-cart').html(total);
+            return true;
         }
     }
 
@@ -351,6 +354,10 @@ $(function () {
     });
 
     let modalCart = (function () {
+        if (checkNumberCart()) {
+            checkNumberCart(getProducts().total);
+        }
+
         $('.shopping-cart').on('click', function () {
             displayProducts();
         });
@@ -358,6 +365,7 @@ $(function () {
 
         // displayProducts();
 
+        // отрисовка данных с localStorage - b-cart
         function displayProducts() {
             let listProducts = getProducts();
 
@@ -374,16 +382,20 @@ $(function () {
                         '<span class="count-product-cart">' + product.count + '</span>' +
                         '<span class="price-product-cart">' + product.price + ' р.' + '</span>' + '</div>');
                 }
+
+                $('.result-sum .sum-products').html(cart.amount);
             }
         }
 
 
         checkNumberCart();
 
+        // получение товаров
         function getProducts() {
             return JSON.parse(localStorage.getItem('b-cart'));
         }
 
+        // установка данных в localStorage
         function setProductData(data) {
             localStorage.setItem('b-cart', JSON.stringify(data));
         }
@@ -394,18 +406,20 @@ $(function () {
         let cart = getProducts() || {};
 
         if (cart.products === undefined) {
+            cart['amount'] = 0;
             cart['products'] = [];
             cart['total'] = 0;
         }
 
-        console.log(cart.products);
 
+
+        // обработка по нажатию на товар
         $product.on('click', function () {
             let $parent = $(this).parent('.products-block');
 
             let idProduct = parseInt($parent.attr('data-id-product'));
             let nameProduct = $parent.children('.name-products').text();
-            let priceProduct = $parent.children('.price').text();
+            let priceProduct = parseInt($parent.children('.price').text());
             let imgProduct = $parent.children('.img-product').attr('src');
 
             if (cart.products !== undefined) {
@@ -413,9 +427,11 @@ $(function () {
                     if (idProduct === currentProduct.id) {
                         currentProduct.count += 1;
                         currentProduct.amount = currentProduct.price * currentProduct.count;
+                        cart.amount += priceProduct;
                         cart.total++;
 
                         setProductData(cart);
+                        checkNumberCart(cart.total);
                         return;
                     }
                 }
@@ -430,10 +446,11 @@ $(function () {
                 amount: parseInt(priceProduct),
             });
 
+            cart.amount += priceProduct;
             cart.total++;
 
             setProductData(cart);
-            checkNumberCart();
+            checkNumberCart(cart.total);
 
         });
 

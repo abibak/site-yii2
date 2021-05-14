@@ -310,7 +310,7 @@ body {
     padding: 12px;
     border-radius: 50%;
     cursor: pointer;
-    transition: background-color .2s;
+    transition: background-color, transform, .2s;
     position: fixed;
     right: 50px;
     top: 200px;
@@ -318,6 +318,7 @@ body {
 
 .shopping-cart:hover {
     background-color: #de522c;
+    transform: scale(1.07);
 }
 
 .shopping-cart .fa-shopping-cart {
@@ -325,7 +326,18 @@ body {
     color: #fff;
 }
 
-
+.shopping-cart .quantity-in-cart {
+    width: 23px;
+    height: 23px;
+    color: #fff;
+    text-align: center;
+    line-height: 23px;
+    background-color: #3874f5;
+    border-radius: 50%;
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+}
 
 
 
