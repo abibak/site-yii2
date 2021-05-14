@@ -109,7 +109,15 @@ AppAsset::register($this);
 
 <div class="modal-cart">
     <div class="container-cart">
-        <p>Корзина покупок</p>
+        <i class="fas fa-times close-modal"></i>
+
+        <p class="title">Ваш заказ:</p>
+
+        <div class="order-list"></div>
+
+        <div class="result-sum">
+            <span class="sum">Сумма: <span class="sum-products"></span></span>
+        </div>
     </div>
 </div>
 

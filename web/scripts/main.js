@@ -334,7 +334,8 @@ $(function () {
     })();
 
     checkNumberCart();
-    function checkNumberCart () {
+
+    function checkNumberCart() {
         if (!localStorage.getItem('b-cart')) {
             $('.shopping-cart').css('display', 'none');
         } else {
@@ -350,7 +351,35 @@ $(function () {
     });
 
     let modalCart = (function () {
+        $('.shopping-cart').on('click', function () {
+            displayProducts();
+        });
+
+
+        // displayProducts();
+
+        function displayProducts() {
+            let listProducts = getProducts();
+
+            console.log(listProducts);
+
+            if (listProducts !== null) {
+                $('.modal-cart .order-list').empty();
+
+                for (let product of listProducts.products) {
+                    console.log(product);
+                    $('.modal-cart .order-list').append('<div class="order-item">' +
+                        `<img class="image-product-cart" src=${product.img} alt="image">` +
+                        '<span class="name-product-cart">' + product.name + '</span>' +
+                        '<span class="count-product-cart">' + product.count + '</span>' +
+                        '<span class="price-product-cart">' + product.price + ' р.' + '</span>' + '</div>');
+                }
+            }
+        }
+
+
         checkNumberCart();
+
         function getProducts() {
             return JSON.parse(localStorage.getItem('b-cart'));
         }
@@ -364,11 +393,12 @@ $(function () {
 
         let cart = getProducts() || {};
 
-        cart = {
-            amount: 0,
-            products: [],
-            total: 0,
+        if (cart.products === undefined) {
+            cart['products'] = [];
+            cart['total'] = 0;
         }
+
+        console.log(cart.products);
 
         $product.on('click', function () {
             let $parent = $(this).parent('.products-block');
@@ -378,18 +408,20 @@ $(function () {
             let priceProduct = $parent.children('.price').text();
             let imgProduct = $parent.children('.img-product').attr('src');
 
-            for (let currentProduct of cart.products) {
-                if (idProduct === currentProduct.id) {
-                    currentProduct.count += 1;
-                    currentProduct.amount = currentProduct.price * currentProduct.count;
-                    cart.total++;
+            if (cart.products !== undefined) {
+                for (let currentProduct of cart.products) {
+                    if (idProduct === currentProduct.id) {
+                        currentProduct.count += 1;
+                        currentProduct.amount = currentProduct.price * currentProduct.count;
+                        cart.total++;
 
-                    setProductData(cart);
-                    return;
+                        setProductData(cart);
+                        return;
+                    }
                 }
             }
 
-            cart.products.push({
+            cart['products'].push({
                 id: parseInt(idProduct),
                 name: nameProduct,
                 img: imgProduct,
@@ -402,6 +434,7 @@ $(function () {
 
             setProductData(cart);
             checkNumberCart();
+
         });
 
         return {
