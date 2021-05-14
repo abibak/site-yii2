@@ -8,6 +8,7 @@ use yii\base\BaseObject;
 use yii\db\ActiveRecord;
 use yii\db\Query;
 use yii\filters\AccessControl;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -112,12 +113,6 @@ class SiteController extends Controller
             }
             die();
         }
-
-//        $data_employees = Employee::find()->select('id, name, surname')->all();
-//        $query = new yii\db\Query();
-//        $data_services = $query->from(['e' => 'service_tariffs'])
-//            ->join('INNER JOIN', 'services', 'e.service_id = services.id')->all();
-
         return $this->render('index');
     }
 
@@ -175,6 +170,7 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
 
@@ -195,8 +191,33 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+    /**
+     * @throws \yii\db\Exception
+     */
     public function actionProducts()
     {
+        date_default_timezone_set('Asia/Novosibirsk');
+
+        $request = Yii::$app->request;
+
+        if ($request->isAjax) {
+            $order_time = date('H:i:s');
+            $received_data = $request->post();
+
+            foreach ($received_data['products'] as $product) {
+                Yii::$app->db->createCommand()->insert('orders', [
+                    'user_id' => Yii::$app->user->getId(),
+                    'product_id' => $product['id'],
+                    'quantity_product' => $product['count'],
+                    'order_time' => $order_time,
+                    'amount' => $product['amount'],
+                    'payment' => $received_data['payment'],
+                ])->execute();
+            }
+            die();
+        }
+
+
         $query = Product::find()->all();
         return $this->render('products', ['products' => $query]);
     }

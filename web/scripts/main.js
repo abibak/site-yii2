@@ -369,13 +369,10 @@ $(function () {
         function displayProducts() {
             let listProducts = getProducts();
 
-            console.log(listProducts);
-
             if (listProducts !== null) {
                 $('.modal-cart .order-list').empty();
 
                 for (let product of listProducts.products) {
-                    console.log(product);
                     $('.modal-cart .order-list').append('<div class="order-item">' +
                         `<img class="image-product-cart" src=${product.img} alt="image">` +
                         '<span class="name-product-cart">' + product.name + '</span>' +
@@ -410,8 +407,6 @@ $(function () {
             cart['products'] = [];
             cart['total'] = 0;
         }
-
-
 
         // обработка по нажатию на товар
         $product.on('click', function () {
@@ -451,7 +446,21 @@ $(function () {
 
             setProductData(cart);
             checkNumberCart(cart.total);
+        });
 
+        $('.modal-cart .checkout').on('click', function () {
+            let products = getProducts();
+            products.payment = $('.payment-method #cash').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/site/products',
+                data: products,
+
+                success: function (response) {
+                    console.log(response);
+                }
+            })
         });
 
         return {
@@ -467,7 +476,6 @@ $(function () {
             show: function (settings) {
                 $modalCart.css({
                     'width': settings.width,
-                    'height': settings.height,
                 });
                 modalCart.center();
                 $(window).on('resize', modalCart.center);

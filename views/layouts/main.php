@@ -113,11 +113,27 @@ AppAsset::register($this);
 
         <p class="title">Ваш заказ:</p>
 
+        <div class="titles">
+            <span class="title-name">Название</span>
+            <span class="title-num">Кол-во</span>
+            <span class="title-price">Цена</span>
+        </div>
+
         <div class="order-list"></div>
 
         <div class="result-sum">
             <span class="sum">Сумма: <span class="sum-products"></span> р.</span>
         </div>
+
+        <div class="payment-method">
+            <p class="payment-text">Способ оплаты</p>
+
+            <input type="radio" id="cash" name="cash" value="Наличными" checked>
+            <label for="cash">Наличными при получении</label>
+
+        </div>
+
+        <button class="checkout">Оформить заказ</button>
     </div>
 </div>
 
