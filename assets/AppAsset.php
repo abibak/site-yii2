@@ -22,6 +22,7 @@ class AppAsset extends AssetBundle
 
     public $css = [
         'css/site.css',
+        'css/admin.css',
         'https://use.fontawesome.com/releases/v5.0.13/css/all.css',
         'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css',
     ];

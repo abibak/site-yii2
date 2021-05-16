@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use Yii;
+use app\models\Positions;
 
 /**
  * This is the model class for table "employees".
@@ -21,7 +21,7 @@ use Yii;
  *
  * @property Positions $position
  * @property Records[] $records
- * @property Schedule[] $schedules
+// * @property Schedule[] $schedules
  */
 class Employee extends \yii\db\ActiveRecord
 {
@@ -93,13 +93,13 @@ class Employee extends \yii\db\ActiveRecord
         return $this->hasMany(Records::className(), ['hairdresser_id' => 'id']);
     }
 
-    /**
-     * Gets query for [[Schedules]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSchedules()
-    {
-        return $this->hasMany(Schedule::className(), ['employees_id' => 'id']);
-    }
+//    /**
+//     * Gets query for [[Schedules]].
+//     *
+//     * @return \yii\db\ActiveQuery
+//     */
+//    public function getSchedules()
+//    {
+//        return $this->hasMany(Schedule::className(), ['employees_id' => 'id']);
+//    }
 }

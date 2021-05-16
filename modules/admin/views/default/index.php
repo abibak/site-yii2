@@ -1,5 +1,16 @@
+<?php
+$this->title = 'Админ панель';
+?>
+
+<style>
+    #main {
+        background: none #333;
+    }
+</style>
+
+
 <div class="admin-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
+    <p class="title"><?= $this->title ?></p>
     <p>
         This is the view content for action "<?= $this->context->action->id ?>".
         The action belongs to the controller "<?= get_class($this->context) ?>"
