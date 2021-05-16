@@ -31,7 +31,7 @@ $this->title = 'Товары';
                 <p class="description"><span><?= $element['description'] ?></span></p>
                 <p class="price"><?= $element['price'] ?> Р.</p>
 
-                <a class="add-cart" href="#"><span>в корзину</span></a>
+                <button class="add-cart" href=""><span>в корзину</span></button>
             </div>
         <?php endforeach; ?>
 

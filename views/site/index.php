@@ -29,9 +29,7 @@ $this->title = 'Главная';
                     <p class="name-service">Укладка волос <span class="price-service">от 500 Р.</span></p>
                 </div>
 
-                <div class="record-btn">
-                    <a id="link-record" href="#">Онлайн запись</a>
-                </div>
+                <button class="record-btn">Онлайн запись</button>
             </div>
         </div>
     </div>

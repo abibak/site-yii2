@@ -13,40 +13,6 @@ $(function () {
         slideRightBtn();
     }
 
-    // смена фона
-    // console.log(slideBackground());
-
-    let intervalSlide = setInterval(slideBackground, 10000);
-
-    let $returnBg = '.bg-image';
-
-    function slideBackground() {
-        let $background = $('#fx-background');
-
-        let $bgOne = $('.bg-image');
-        let $bgTwo = $('.bg-image2');
-
-        if ($background.hasClass('active')) {
-            $bgTwo.css({
-                'opacity': '1'
-            });
-            $bgOne.removeClass('active');
-
-            $returnBg = '.bg-image2';
-        } else {
-            $bgTwo.css({
-                'opacity': '0'
-            });
-
-            $bgOne.css({
-                'opacity': '1'
-            });
-            $bgOne.addClass('active');
-
-            $returnBg = '.bg-image';
-        }
-    }
-
     $(window).on('scroll', function () {
         scroll = $(window).scrollTop();
 
@@ -59,16 +25,16 @@ $(function () {
 
             if (scroll <= 1) {
                 returnValue($sectionContent, 1);
-                returnValue($returnBg, 1);
+                // returnValue($returnBg, 1);
             } else {
                 animateScale($sectionContent, 400);
-                animateScale($returnBg, 600);
+                // animateScale($returnBg, 600);
             }
         }
     });
 
     // обработчик на выполнения скролла top: 0
-    $btnTop.mousedown(function () {
+    $btnTop.on('click', function () {
         $('body, html').stop(true).animate({
             scrollTop: 0
         }, 400);
@@ -131,8 +97,12 @@ $(function () {
     });
 
     // отобразить модальное окно с записью
-    $('.record').on('click', function (e) {
+    $(document).on('click', '.record, .record-btn', function (e) {
         e.preventDefault();
+
+        $('body, html').stop(true).animate({
+            scrollTop: 0
+        }, 400);
 
         $('html').css('overflow', 'hidden');
         $('.bg-main').css({'opacity': 1, 'z-index': 1});
@@ -315,17 +285,17 @@ $(function () {
 
             show: function (settings) {
                 $modal.css({
-                    'display': 'block',
                     'width': settings.width,
                     'height': settings.height,
-                    'opacity': '1',
                 });
+
                 modal.center();
+                $modal.fadeIn(350);
                 $(window).on('resize', modal.center);
             },
 
             close: function () {
-                $modal.hide();
+                $modal.fadeOut(350);
 
                 $('html').css('overflow', 'visible');
                 $('.bg-main').css({'opacity': 0, 'z-index': -1});
@@ -346,7 +316,33 @@ $(function () {
         }
     }
 
+    // получение товаров
+    function getProducts() {
+        return JSON.parse(localStorage.getItem('b-cart'));
+    }
+
+    displayProducts();
+    function displayProducts() {
+        let listProducts = getProducts();
+
+        if (listProducts !== null) {
+            $('.modal-cart .order-list').empty();
+
+            for (let product of listProducts.products) {
+                $('.modal-cart .order-list').append('<div class="order-item">' +
+                    `<img class="image-product-cart" src=${product.img} alt="image">` +
+                    '<span class="name-product-cart">' + product.name + '</span>' +
+                    '<span class="count-product-cart">' + product.count + '</span>' +
+                    '<span class="price-product-cart">' + product.price + ' р.' + '</span>' + '</div>');
+            }
+
+            $('.result-sum .sum-products').html(listProducts.amount);
+        }
+    }
+
     $('.shopping-cart').on('click', function () {
+        $('html').css('overflow', 'hidden');
+
         modalCart.show({
             width: 650,
             height: 450,
@@ -354,51 +350,29 @@ $(function () {
     });
 
     let modalCart = (function () {
+        let $modalCart = $('.modal-cart');
+        let $product = $('.add-cart');
+
+        $('.modal-cart .close-modal').on('click', function () {
+            modalCart.close();
+        });
+
         if (checkNumberCart()) {
             checkNumberCart(getProducts().total);
         }
 
-        $('.shopping-cart').on('click', function () {
-            displayProducts();
-        });
-
-
-        // displayProducts();
+        // $('.shopping-cart').on('click', function () {
+        //     displayProducts();
+        // });
 
         // отрисовка данных с localStorage - b-cart
-        function displayProducts() {
-            let listProducts = getProducts();
-
-            if (listProducts !== null) {
-                $('.modal-cart .order-list').empty();
-
-                for (let product of listProducts.products) {
-                    $('.modal-cart .order-list').append('<div class="order-item">' +
-                        `<img class="image-product-cart" src=${product.img} alt="image">` +
-                        '<span class="name-product-cart">' + product.name + '</span>' +
-                        '<span class="count-product-cart">' + product.count + '</span>' +
-                        '<span class="price-product-cart">' + product.price + ' р.' + '</span>' + '</div>');
-                }
-
-                $('.result-sum .sum-products').html(cart.amount);
-            }
-        }
-
 
         checkNumberCart();
-
-        // получение товаров
-        function getProducts() {
-            return JSON.parse(localStorage.getItem('b-cart'));
-        }
 
         // установка данных в localStorage
         function setProductData(data) {
             localStorage.setItem('b-cart', JSON.stringify(data));
         }
-
-        let $modalCart = $('.modal-cart');
-        let $product = $('.add-cart');
 
         let cart = getProducts() || {};
 
@@ -427,6 +401,7 @@ $(function () {
 
                         setProductData(cart);
                         checkNumberCart(cart.total);
+                        displayProducts();
                         return;
                     }
                 }
@@ -446,10 +421,17 @@ $(function () {
 
             setProductData(cart);
             checkNumberCart(cart.total);
+            displayProducts();
         });
 
         $('.modal-cart .checkout').on('click', function () {
             let products = getProducts();
+
+            if (products === null) {
+                console.log('чмо');
+                return;
+            }
+
             products.payment = $('.payment-method #cash').val();
 
             $.ajax({
@@ -460,29 +442,45 @@ $(function () {
                 success: function (response) {
                     console.log(response);
                 }
-            })
+            });
         });
 
         return {
             center: function () {
                 let center = ($(window).width() - $modalCart.width()) / 2;
+                let top = (($(window).height() - $modalCart.outerHeight()) / 2) + $(window).scrollTop();
 
                 $modalCart.css({
-                    'top': 150,
+                    'top': top,
                     'left': center,
-                })
+                });
             },
 
             show: function (settings) {
+                $modalCart.fadeIn(350);
+
+                $('.bg-main').css({
+                    'opacity': 1,
+                    'z-index': 1,
+                });
+
                 $modalCart.css({
                     'width': settings.width,
                 });
+
                 modalCart.center();
                 $(window).on('resize', modalCart.center);
             },
 
             close: function () {
-                // code close modal cart
+                $modalCart.fadeOut(350);
+
+                $('.bg-main').css({
+                    'opacity': 0,
+                    'z-index': -1,
+                });
+
+                $('html').css('overflow', 'visible');
             },
         }
 

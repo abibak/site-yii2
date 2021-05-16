@@ -24,9 +24,7 @@ body {
     color: #000;
     font-size: 18px;
     position: absolute;
-    opacity: 0;
-    transition: opacity .3s;
-    z-index: 1000;
+    z-index: 2;
 }
 
 .modal-record .content-modal {
@@ -225,16 +223,14 @@ body {
 
 
 
+
 /* modal cart styles */
 .modal-cart {
-    width: 650px;
+    display: none;
     position: absolute;
-    left: 200px;
-    top: 200px;
     color: #000;
     background-color: #fff;
-    z-index: 1;
-    border: 1px solid red;
+    z-index: 2;
 }
 
 .modal-cart .container-cart {
@@ -380,12 +376,12 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, .5);
+    opacity: 0;
     position: fixed;
     top: 0;
     left: 0;
-    opacity: 0;
-    transition: opacity .3s;
     z-index: -1;
+    transition: opacity .3s;
 }
 
 .bg-image, .bg-image2 {
@@ -395,7 +391,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    transition: transform, opacity, 1.5s;
+    transition: transform, opacity, .8s;
 }
 
 .bg-image {
@@ -569,20 +565,18 @@ body {
 }
 
 .record-btn {
+    min-width: 100px;
     float: right;
     width: 250px;
     height: 65px;
     text-align: center;
     background-color: #f75a2f;
-    cursor: pointer;
-    transition: background-color .2s;
-}
-
-.record-btn #link-record {
-    line-height: 65px;
-    text-decoration: none;
     color: #fff;
     text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color .2s;
+    outline: none;
+    border: none;
 }
 
 .record-btn:hover {
@@ -636,9 +630,10 @@ body {
     margin-top: 45px;
     text-transform: uppercase;
     font-weight: 600;
-    text-decoration: none;
     transition: background, color, .2s;
     font-size: 15px;
+    border: none;
+    outline: none;
 }
 
 .site-products .add-cart span {
