@@ -39,14 +39,13 @@ class Employee extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['position_id', 'name', 'surname', 'patronymic', 'age', 'phone', 'email', 'salary', 'status', 'password'], 'required'],
+            [['position_id', 'name', 'surname', 'patronymic', 'age', 'phone', 'email', 'salary', 'status'], 'required'],
             [['position_id', 'age', 'phone', 'status'], 'integer'],
             [['salary'], 'number'],
             [['name'], 'string', 'max' => 150],
             [['surname'], 'string', 'max' => 200],
             [['patronymic'], 'string', 'max' => 250],
             [['email'], 'string', 'max' => 30],
-            [['password'], 'string', 'max' => 60],
             [['phone'], 'unique'],
             [['email'], 'unique'],
             [['position_id'], 'exist', 'skipOnError' => true, 'targetClass' => Positions::className(), 'targetAttribute' => ['position_id' => 'id']],
@@ -60,46 +59,15 @@ class Employee extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'position_id' => 'Position ID',
-            'name' => 'Name',
-            'surname' => 'Surname',
-            'patronymic' => 'Patronymic',
-            'age' => 'Age',
-            'phone' => 'Phone',
+            'position_id' => 'Позиция',
+            'name' => 'Имя',
+            'surname' => 'Фамилия',
+            'patronymic' => 'Отчество',
+            'age' => 'Возраст',
+            'phone' => 'Телефон',
             'email' => 'Email',
-            'salary' => 'Salary',
-            'status' => 'Status',
-            'password' => 'Password',
+            'salary' => 'Зарплата',
+            'status' => 'Статус',
         ];
     }
-
-    /**
-     * Gets query for [[Position]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPosition()
-    {
-        return $this->hasOne(Positions::className(), ['id' => 'position_id']);
-    }
-
-    /**
-     * Gets query for [[Records]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRecords()
-    {
-        return $this->hasMany(Records::className(), ['hairdresser_id' => 'id']);
-    }
-
-//    /**
-//     * Gets query for [[Schedules]].
-//     *
-//     * @return \yii\db\ActiveQuery
-//     */
-//    public function getSchedules()
-//    {
-//        return $this->hasMany(Schedule::className(), ['employees_id' => 'id']);
-//    }
 }

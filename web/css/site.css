@@ -8,13 +8,17 @@
 body {
     overflow-x: hidden;
 }
+
+ul li {
+    list-style-type: none;
+}
+
 /* ajax validation */
 .help-block {
     color: red;
 }
 
 /* modal window styles */
-
 .modal-record {
     display: none;
     margin: auto;

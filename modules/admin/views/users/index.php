@@ -10,6 +10,22 @@ use yii\grid\GridView;
 $this->title = Yii::t('app', 'Employees');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<style>
+    body {
+        color: #fff;
+    }
+
+    .table {
+        color: #fff;
+    }
+
+    #main {
+        background: none #333;
+    }
+
+</style>
+
 <div class="employee-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -36,7 +52,6 @@ $this->params['breadcrumbs'][] = $this->title;
             //'email:email',
             //'salary',
             //'status',
-            //'password',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

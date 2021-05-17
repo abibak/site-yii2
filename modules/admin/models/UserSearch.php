@@ -70,8 +70,7 @@ class UserSearch extends Employee
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'surname', $this->surname])
             ->andFilterWhere(['like', 'patronymic', $this->patronymic])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'password', $this->password]);
+            ->andFilterWhere(['like', 'email', $this->email]);
 
         return $dataProvider;
     }

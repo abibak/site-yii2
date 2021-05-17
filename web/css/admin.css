@@ -5,12 +5,28 @@
     font-family: 'Ubuntu', sans-serif;
 }
 
-.admin-default-index {
-    margin: 60px 0 60px 0;
-    padding-top: 60px;
+.admin-basic {
+    display: flex;
 }
 
-.admin-default-index .title {
-    text-align: left;
+.admin-basic .left-navbar {
+    width: 350px;
+    height: 100vh;
+    padding: 20px 30px;
+    background-color: #333;
+    font-size: 18px;
+}
+
+.admin-basic .left-navbar .text-admin-panel {
+    display: inline-block;
     color: #fff;
+    text-transform: uppercase;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: .5rem;
+}
+
+.admin-basic .content-admin {
+    width: 100%;
+    padding: 20px 0;
+    margin: 0 30px;
 }

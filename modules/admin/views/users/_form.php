@@ -12,7 +12,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'position_id')->textInput() ?>
+    <!--    --><? //= $form->field($model, 'position_id')->textInput() ?>
+
+    <?= $form->field($model, 'position_id')->dropDownList([
+        5 => 'Администратор',
+        6 => 'Сотрудник',
+    ]);
+    ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -28,9 +34,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'salary')->textInput() ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <!--    --><? //= $form->field($model, 'status')->textInput() ?>
 
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'status')->dropDownList([
+        '0' => 'Не активен',
+        '1' => 'Активен',
+    ]);
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
