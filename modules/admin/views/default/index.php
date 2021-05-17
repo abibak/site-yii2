@@ -8,7 +8,6 @@ $this->title = 'Админ панель';
     }
 </style>
 
-
 <div class="admin-default-index">
     <p class="title"><?= $this->title ?></p>
     <p>

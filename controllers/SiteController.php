@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\base\BaseObject;
 use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -13,7 +14,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Product;
 use app\models\Records;
-use app\models\Clients;
+use app\models\Users;
 use yii\widgets\ActiveForm;
 
 class SiteController extends Controller
@@ -232,7 +233,7 @@ class SiteController extends Controller
     public function actionRegister()
     {
         $request = Yii::$app->request;
-        $model = new Clients();
+        $model = new Users();
 
         if (!Yii::$app->user->isGuest) {
             $this->redirect('/');
@@ -247,6 +248,7 @@ class SiteController extends Controller
             if ($model->validate()) {
                 $user = new User();
 
+                $user->position_id = 4;
                 $user->name = $model->name;
                 $user->surname = $model->surname;
                 $user->patronymic = $model->patronymic;

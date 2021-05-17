@@ -4,8 +4,9 @@ namespace app\models;
 
 use yii\base\Model;
 
-class Clients extends Model
+class Users extends Model
 {
+    public $position_id;
     public $name;
     public $surname;
     public $patronymic;
