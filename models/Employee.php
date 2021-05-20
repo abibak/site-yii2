@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\models\Positions;
+use Yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "employees".
@@ -23,7 +24,7 @@ use app\models\Positions;
  * @property Records[] $records
 // * @property Schedule[] $schedules
  */
-class Employee extends \yii\db\ActiveRecord
+class Employee extends ActiveRecord
 {
     /**
      * {@inheritdoc}

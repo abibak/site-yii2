@@ -4,19 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\UserSearch */
+/* @var $searchModel app\modules\admin\models\ProductsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Сотрудники');
+$this->title = Yii::t('app', 'Products');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-<div class="employee-index">
+<div class="products-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Добавить сотрудника'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Products'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -27,16 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-//            'id',
-//            'position_id',
+            'id',
+            'category_id',
+            'discount_id',
             'name',
-            'surname',
-            'patronymic',
-            //'age',
-            //'phone',
-            'email:email',
-            //'salary',
-            //'status',
+            'description',
+            //'price',
+            //'image',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

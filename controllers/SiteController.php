@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Orders;
+use app\models\ProductProperties;
 use Yii;
 use yii\base\BaseObject;
 use yii\db\Query;
@@ -12,7 +14,7 @@ use yii\filters\VerbFilter;
 use app\models\User;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\Product;
+use app\models\Products;
 use app\models\Records;
 use app\models\Users;
 use yii\widgets\ActiveForm;
@@ -194,6 +196,10 @@ class SiteController extends Controller
     {
         date_default_timezone_set('Asia/Novosibirsk');
 
+//        $properties = new ProductProperties();
+//
+//        print_r($properties->getProduct());
+
         $request = Yii::$app->request;
 
         if ($request->isAjax) {
@@ -213,8 +219,7 @@ class SiteController extends Controller
             die();
         }
 
-
-        $query = Product::find()->all();
+        $query = Products::find()->all();
         return $this->render('products', ['products' => $query]);
     }
 

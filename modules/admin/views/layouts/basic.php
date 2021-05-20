@@ -25,8 +25,8 @@ AppAsset::register($this);
         <p class="text-admin-panel h3">Админ панель</p>
         <ul>
             <li class=""><?= Html::a('Главная', ['/admin'], ['class' => '']) ?></li>
-            <li class=""><?= Html::a('Продукция', [''], ['class' => '']) ?></li>
-            <li class=""><?= Html::a('Сотрудники', [''], ['class' => '']) ?></li>
+            <li class=""><?= Html::a('Продукция', ['/admin/products/index'], ['class' => '']) ?></li>
+            <li class=""><?= Html::a('Сотрудники', ['/admin/users/index'], ['class' => '']) ?></li>
         </ul>
     </div>
 
