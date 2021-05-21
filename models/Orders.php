@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Yii;
-use Yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "orders".
@@ -19,7 +18,7 @@ use Yii\db\ActiveRecord;
  * @property Products $product
  * @property Users $user
  */
-class Orders extends ActiveRecord
+class Orders extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -51,12 +50,32 @@ class Orders extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'product_id' => 'Product ID',
-            'quantity_product' => 'Quantity Product',
-            'order_time' => 'Order Time',
-            'amount' => 'Amount',
-            'payment' => 'Payment',
+            'user_id' => 'Пользователь',
+            'product_id' => 'Товар',
+            'quantity_product' => 'Кол-во товара',
+            'order_time' => 'Время заказа',
+            'amount' => 'Сумма',
+            'payment' => 'Метод оплаты',
         ];
+    }
+
+    /**
+     * Gets query for [[Product]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProduct()
+    {
+        return $this->hasOne(Products::className(), ['id' => 'product_id']);
+    }
+
+    /**
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'user_id']);
     }
 }

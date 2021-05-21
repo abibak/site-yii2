@@ -2,10 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\Orders;
-use app\models\ProductProperties;
 use Yii;
-use yii\base\BaseObject;
 use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\web\Controller;

@@ -27,6 +27,7 @@ AppAsset::register($this);
             <li class=""><?= Html::a('Главная', ['/admin'], ['class' => '']) ?></li>
             <li class=""><?= Html::a('Продукция', ['/admin/products/index'], ['class' => '']) ?></li>
             <li class=""><?= Html::a('Сотрудники', ['/admin/users/index'], ['class' => '']) ?></li>
+            <li class=""><?= Html::a('Заказы', ['/admin/orders/index'], ['class' => '']) ?></li>
         </ul>
     </div>
 

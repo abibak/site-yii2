@@ -2,8 +2,7 @@
 
 namespace app\models;
 
-use app\models\Positions;
-use Yii\db\ActiveRecord;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "employees".
@@ -22,7 +21,6 @@ use Yii\db\ActiveRecord;
  *
  * @property Positions $position
  * @property Records[] $records
-// * @property Schedule[] $schedules
  */
 class Employee extends ActiveRecord
 {
@@ -49,7 +47,7 @@ class Employee extends ActiveRecord
             [['email'], 'string', 'max' => 30],
             [['phone'], 'unique'],
             [['email'], 'unique'],
-            [['position_id'], 'exist', 'skipOnError' => true, 'targetClass' => Positions::className(), 'targetAttribute' => ['position_id' => 'id']],
+            [['position_id'], 'exist', 'skipOnError' => true, 'targetClass' => Positions::class, 'targetAttribute' => ['position_id' => 'id']],
         ];
     }
 

@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use yii\base\BaseObject;
+use Yii;
 use yii\base\NotSupportedException;
 use yii\db\ActiveRecord;
 use yii\db\Query;
@@ -79,11 +79,17 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return \Yii::$app->security->validatePassword($password, $this->password);
     }
 
-    public function getPosition()
+    static public function getPosition()
     {
         $query = new Query();
-        return $query->from(['e' => 'positions'])
+
+        $position = $query->from(['e' => 'positions'])
             ->join('INNER JOIN', 'users', 'e.id = users.position_id')->select('e.position')
             ->where(['users.id' => \Yii::$app->user->getId()])->one();
+
+        if (Yii::$app->user->isGuest || (int)$position['position'] !== 1) {
+            return false;
+        }
+        return true;
     }
 }

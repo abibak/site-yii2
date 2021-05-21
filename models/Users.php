@@ -13,6 +13,11 @@ class Users extends Model
     public $phone;
     public $password;
 
+    static public function tableName()
+    {
+        return 'users';
+    }
+
     public function rules()
     {
         return [

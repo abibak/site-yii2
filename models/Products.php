@@ -36,7 +36,7 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'discount_id'], 'integer'],
+            [['category_id'], 'integer'],
             [['name', 'description', 'price', 'image'], 'required'],
             [['price'], 'number'],
             [['name'], 'string', 'max' => 150],
@@ -71,35 +71,5 @@ class Products extends \yii\db\ActiveRecord
     public function getOrders()
     {
         return $this->hasMany(Orders::className(), ['product_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[ProductProperties]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProductProperties()
-    {
-        return $this->hasMany(ProductProperties::className(), ['product_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[Discount]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDiscount()
-    {
-        return $this->hasOne(Discounts::className(), ['id' => 'discount_id']);
-    }
-
-    /**
-     * Gets query for [[Category]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCategory()
-    {
-        return $this->hasOne(Categories::className(), ['id' => 'category_id']);
     }
 }
