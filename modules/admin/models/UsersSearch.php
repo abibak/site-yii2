@@ -4,12 +4,12 @@ namespace app\modules\admin\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Employee;
+use app\models\Users;
 
 /**
- * UserSearch represents the model behind the search form of `app\models\Employee`.
+ * UsersSearch represents the model behind the search form of `app\models\Users`.
  */
-class UserSearch extends Employee
+class UsersSearch extends Users
 {
     /**
      * {@inheritdoc}
@@ -17,9 +17,8 @@ class UserSearch extends Employee
     public function rules()
     {
         return [
-            [['id', 'position_id', 'age', 'phone', 'status'], 'integer'],
-            [['name', 'surname', 'patronymic', 'email', 'password'], 'safe'],
-            [['salary'], 'number'],
+            [['id', 'position_id'], 'integer'],
+            [['name', 'surname', 'patronymic', 'phone', 'password'], 'safe'],
         ];
     }
 
@@ -41,7 +40,9 @@ class UserSearch extends Employee
      */
     public function search($params)
     {
-        $query = Employee::find();
+        $query = Users::find();
+
+        $query->joinWith('position');
 
         // add conditions that should always apply here
 
@@ -61,16 +62,13 @@ class UserSearch extends Employee
         $query->andFilterWhere([
             'id' => $this->id,
             'position_id' => $this->position_id,
-            'age' => $this->age,
-            'phone' => $this->phone,
-            'salary' => $this->salary,
-            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'surname', $this->surname])
             ->andFilterWhere(['like', 'patronymic', $this->patronymic])
-            ->andFilterWhere(['like', 'email', $this->email]);
+            ->andFilterWhere(['like', 'phone', $this->phone])
+            ->andFilterWhere(['like', 'password', $this->password]);
 
         return $dataProvider;
     }

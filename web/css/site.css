@@ -318,6 +318,10 @@ ul li {
     font-weight: bold;
 }
 
+.modal-cart .payment-method {
+    padding-top: 30px;
+}
+
 .modal-cart .payment-method .payment-text {
     font-weight: bold;
 }
@@ -338,6 +342,15 @@ ul li {
     background-color: #de522c;
 }
 
+.modal-cart .clear-cart {
+    cursor: pointer;
+    color: #3874f5;
+}
+
+.modal-cart .clear-cart:hover {
+    color: #2454c2;
+}
+
 .shopping-cart {
     background-color: #f75a2f;
     padding: 12px;
@@ -347,6 +360,7 @@ ul li {
     position: fixed;
     right: 50px;
     top: 200px;
+    z-index: 1;
 }
 
 .shopping-cart:hover {
@@ -519,9 +533,9 @@ ul li {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     margin-top: 100vh;
     background-color: #fff;
-    padding: 60px 0 60px 0;
     color: #000;
     font-size: 17px;
     position: relative;
@@ -585,6 +599,25 @@ ul li {
 
 .record-btn:hover {
     background-color: #de522c;
+}
+
+.section-content .container-info, .container-funds {
+    padding: 60px 30px 60px 30px;
+}
+
+.section-content .container-funds {
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+}
+
+.section-content .container-funds .title {
+    text-align: left;
+}
+
+.section-content .container-funds .description-fund {
+    width: 300px;
+    font-size: 15px;
 }
 
 /* products styles */
@@ -872,4 +905,3 @@ a.desc:after {
         opacity: 1;
     }
 }
-

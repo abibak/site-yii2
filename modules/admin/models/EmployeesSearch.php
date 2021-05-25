@@ -2,15 +2,14 @@
 
 namespace app\modules\admin\models;
 
-use app\models\Products;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Orders;
+use app\models\Employee;
 
 /**
- * OrdersSearch represents the model behind the search form of `app\models\Orders`.
+ * EmployeesSearch represents the model behind the search form of `app\models\Employee`.
  */
-class OrdersSearch extends Orders
+class EmployeesSearch extends Employee
 {
     /**
      * {@inheritdoc}
@@ -18,8 +17,9 @@ class OrdersSearch extends Orders
     public function rules()
     {
         return [
-            [['id', 'user_id', 'product_id', 'quantity_product', 'amount'], 'integer'],
-            [['order_time', 'payment'], 'safe'],
+            [['id', 'position_id', 'age', 'phone', 'status'], 'integer'],
+            [['name', 'surname', 'patronymic', 'email', 'password'], 'safe'],
+            [['salary'], 'number'],
         ];
     }
 
@@ -41,7 +41,7 @@ class OrdersSearch extends Orders
      */
     public function search($params)
     {
-        $query = Orders::find();
+        $query = Employee::find();
 
         // add conditions that should always apply here
 
@@ -60,14 +60,17 @@ class OrdersSearch extends Orders
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
-            'product_id' => $this->product_id,
-            'quantity_product' => $this->quantity_product,
-            'order_time' => $this->order_time,
-            'amount' => $this->amount,
+            'position_id' => $this->position_id,
+            'age' => $this->age,
+            'phone' => $this->phone,
+            'salary' => $this->salary,
+            'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'payment', $this->payment]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'surname', $this->surname])
+            ->andFilterWhere(['like', 'patronymic', $this->patronymic])
+            ->andFilterWhere(['like', 'email', $this->email]);
 
         return $dataProvider;
     }

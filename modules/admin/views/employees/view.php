@@ -4,14 +4,15 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Orders */
+/* @var $model app\models\Employee */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Заказы'), 'url' => ['index']];
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Employees'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="orders-view">
+<div class="employee-view">
+
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
@@ -29,12 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'user_id',
-            'product.name',
-            'quantity_product',
-            'order_time',
-            'amount',
-            'payment',
+            'position_id',
+            'name',
+            'surname',
+            'patronymic',
+            'age',
+            'phone',
+            'email:email',
+            'salary',
+            'status',
         ],
     ]) ?>
 

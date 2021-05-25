@@ -17,7 +17,6 @@ use Yii;
  *
  * @property Orders[] $orders
  * @property ProductProperties[] $productProperties
- * @property Discounts $discount
  * @property Categories $category
  */
 class Products extends \yii\db\ActiveRecord
@@ -36,13 +35,12 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id'], 'integer'],
+            [['category_id', 'discount_id'], 'integer'],
             [['name', 'description', 'price', 'image'], 'required'],
             [['price'], 'number'],
             [['name'], 'string', 'max' => 150],
             [['description'], 'string', 'max' => 500],
             [['image'], 'string', 'max' => 100],
-            [['discount_id'], 'exist', 'skipOnError' => true, 'targetClass' => Discounts::className(), 'targetAttribute' => ['discount_id' => 'id']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
     }
@@ -71,5 +69,25 @@ class Products extends \yii\db\ActiveRecord
     public function getOrders()
     {
         return $this->hasMany(Orders::className(), ['product_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[ProductProperties]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProductProperties()
+    {
+        return $this->hasMany(ProductProperties::className(), ['product_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Category]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Categories::className(), ['id' => 'category_id']);
     }
 }

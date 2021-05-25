@@ -125,6 +125,8 @@ AppAsset::register($this);
             <span class="sum">Сумма: <span class="sum-products"></span> р.</span>
         </div>
 
+        <span class="clear-cart">Очистить корзину</span>
+
         <div class="payment-method">
             <p class="payment-text">Способ оплаты</p>
 

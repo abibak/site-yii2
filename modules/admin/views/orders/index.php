@@ -11,7 +11,6 @@ $this->title = Yii::t('app', 'Заказы');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="orders-index">
-
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
@@ -26,9 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-//            'id',
-            'user_id',
-//            'product_id',
+            [
+                'label' => 'Пользователь',
+                'value' => 'user.name',
+                'format' => 'html',
+            ],
             [
                 'label' => 'Наименование',
                 'value' => 'product.name',

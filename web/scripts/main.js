@@ -100,6 +100,8 @@ $(function () {
     $(document).on('click', '.record, .record-btn', function (e) {
         e.preventDefault();
 
+        $('.shopping-cart').hide();
+
         $('body, html').stop(true).animate({
             scrollTop: 0
         }, 400);
@@ -114,7 +116,6 @@ $(function () {
     });
 
     let modal = (function () {
-
         // объект сбора данных о записи
         let dataRecordObj = {
             hairdresserId: null,
@@ -255,7 +256,7 @@ $(function () {
                     data: 'record=' + JSON.stringify(dataRecordObj),
 
                     beforeSend: function () {
-                        $('.block-time').html('<p>' + 'Отправка...' + '</p>');
+                        $('.block-time').html('<p>' + 'Запись...' + '</p>');
                     },
 
                     success: function () {
@@ -264,10 +265,6 @@ $(function () {
 
                         $('.content-modal').append('<p class="success-record">' + 'Запись прошла успешно' + '</p>')
                     },
-
-                    fail: function () {
-                        console.log('fail');
-                    }
                 });
             }
         });
@@ -297,6 +294,8 @@ $(function () {
             close: function () {
                 $modal.fadeOut(350);
 
+                $('.shopping-cart').show();
+
                 $('html').css('overflow', 'visible');
                 $('.bg-main').css({'opacity': 0, 'z-index': -1});
             }
@@ -306,7 +305,9 @@ $(function () {
     checkNumberCart();
 
     function checkNumberCart(total) {
-        if (!localStorage.getItem('b-cart')) {
+        let productsCart = getProducts();
+
+        if (productsCart['products'].length === 0) {
             $('.shopping-cart').css('display', 'none');
             return false;
         } else {
@@ -322,6 +323,7 @@ $(function () {
     }
 
     displayProducts();
+
     function displayProducts() {
         let listProducts = getProducts();
 
@@ -343,6 +345,8 @@ $(function () {
     $('.shopping-cart').on('click', function () {
         $('html').css('overflow', 'hidden');
 
+        $(this).hide();
+
         modalCart.show({
             width: 650,
             height: 450,
@@ -352,21 +356,18 @@ $(function () {
     let modalCart = (function () {
         let $modalCart = $('.modal-cart');
         let $product = $('.add-cart');
+        let $orderItem = $('.modal-cart .order-list .order-item');
 
         $('.modal-cart .close-modal').on('click', function () {
             modalCart.close();
+            checkNumberCart();
         });
 
         if (checkNumberCart()) {
             checkNumberCart(getProducts().total);
         }
 
-        // $('.shopping-cart').on('click', function () {
-        //     displayProducts();
-        // });
-
         // отрисовка данных с localStorage - b-cart
-
         checkNumberCart();
 
         // установка данных в localStorage
@@ -382,7 +383,22 @@ $(function () {
             cart['total'] = 0;
         }
 
-        // обработка по нажатию на товар
+        $('.modal-cart .clear-cart').on('click', function () {
+            // let cartClear = getProducts();
+
+            if (cart !== null) {
+                $orderItem.remove();
+
+                cart['products'] = [];
+                cart['amount'] = 0;
+                cart['total'] = 0;
+
+                setProductData(cart);
+                displayProducts();
+            }
+        });
+
+// обработка по нажатию на товар
         $product.on('click', function () {
             let $parent = $(this).parent('.products-block');
 
@@ -428,21 +444,24 @@ $(function () {
             let products = getProducts();
 
             if (products === null) {
-                console.log('чмо');
                 return;
             }
 
             products.payment = $('.payment-method #cash').val();
 
-            $.ajax({
-                type: 'POST',
-                url: '/site/products',
-                data: products,
+            if (products['products'].length !== 0) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/site/products',
+                    data: products,
 
-                success: function (response) {
-                    console.log(response);
-                }
-            });
+                    success: function (response) {
+                        console.log(response);
+                    }
+                });
+            } else {
+                alert('Ошибка');
+            }
         });
 
         return {
@@ -475,6 +494,8 @@ $(function () {
             close: function () {
                 $modalCart.fadeOut(350);
 
+                $('.shopping-cart').show();
+
                 $('.bg-main').css({
                     'opacity': 0,
                     'z-index': -1,
@@ -483,8 +504,6 @@ $(function () {
                 $('html').css('overflow', 'visible');
             },
         }
-
-    })();
-
-
+    })
+    ();
 });

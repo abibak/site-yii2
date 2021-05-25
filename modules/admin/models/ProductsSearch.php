@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\models;
 
+use app\models\Categories;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Products;

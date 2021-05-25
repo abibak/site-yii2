@@ -266,6 +266,11 @@ class SiteController extends Controller
 
         return $this->render('register', ['model' => $model]);
     }
+
+    public function actionProfile()
+    {
+
+    }
 }
 
 

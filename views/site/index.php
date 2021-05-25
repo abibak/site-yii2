@@ -8,7 +8,7 @@ $this->title = 'Главная';
 <!-- general information section -->
 
 <div>
-    <div class="container section-content">
+    <div class="section-content">
         <div class="container-info">
             <p class="title">EREN STYLE BARBERSHOP в Томске</p>
 
@@ -30,6 +30,15 @@ $this->title = 'Главная';
                 </div>
 
                 <button class="record-btn">Онлайн запись</button>
+            </div>
+        </div>
+
+        <div class="container-funds">
+            <p class="title">Средства</p>
+
+            <div class="description-fund">
+                Профессиональные средства, с которыми мы работаем в парикмахерской и которую с удовольствием
+                можно использовать дома.
             </div>
         </div>
     </div>

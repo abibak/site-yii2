@@ -4,18 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\ProductsSearch */
+/* @var $searchModel app\modules\admin\models\EmployeesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Products');
+$this->title = Yii::t('app', 'Сотрудники');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="products-index">
+
+<div class="employee-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Products'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Добавить сотрудника'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -25,25 +26,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'id',
-            [
-                'label' => 'Категория',
-                'value' => 'category.category_name'
-            ],
-            'name',
-            'description',
-            'price',
-            'image',
 
+//            'id',
+//            'position_id',
+            'name',
+            'surname',
+            'patronymic',
+            'age',
+            'phone',
+            'email:email',
+            'salary',
+            'status',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{edit}',
                 'buttons' => [
                     'edit' => function ($url, $model, $key) {
-                        return Html::a('Просмотреть', ['products/view/', 'id' => $model->id]);
+                        return Html::a('Просмотреть', ['employees/view/', 'id' => $model->id]);
                     }
                 ],
             ],
+
+            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 
