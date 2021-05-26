@@ -812,26 +812,46 @@ ul li {
 
 /* footer styles */
 .footer {
+    width: 100%;
     background-color: #333;
     padding: 60px 0;
 }
 
+.footer .footer-right {
+    float: right;
+}
+
+.footer .footer-right .feedback, .socials {
+    display: inline-block;
+}
+
+.footer .logo-btn {
+    display: inline-block;
+}
+
 .footer .logo-png {
     display: block;
-    text-align: center;
+    margin: auto;
     width: 220px;
     height: 130px;
 }
 
-.footer .container {
-    width: 600px;
-    margin: auto;
+.footer .container-foot {
+    display: flex;
+    justify-content: space-between;
+    width: 700px;
+    margin: 0 auto 0 auto;
 }
 
 .footer .record-btn {
     float: none;
     margin-top: 30px;
 }
+
+.footer .footer-span {
+    display: block;
+}
+
 
 .jumbotron {
     text-align: center;

@@ -181,13 +181,26 @@ AppAsset::register($this);
 
     <!-- footer -->
     <footer class="footer">
-        <div class="container">
-            <?= Html::img('@web/images/logo-white.png', ['class' => 'logo-png', 'alt' => 'Logo']) ?>
+        <div class="container-foot">
+            <div class="logo-btn">
+                <?= Html::img('@web/images/logo-white.png', ['class' => 'logo-png', 'alt' => 'Logo']) ?>
+                <button class="record-btn">Онлайн запись</button>
+            </div>
 
-            <button class="record-btn">Онлайн запись</button>
+            <div class="footer-right">
+                <div class="feedback">
+                    <span class="footer-span">Пишите нам:</span>
+                    <a href="mailto: asv@example.com">example.com</a>
+                </div>
 
+                <div class="socials">
+                    <span class="footer-span">Социальные сети</span>
+                    <?= Html::img('@web/images/vk.png', ['alt' => 'Vk']) ?>
+                    <?= Html::img('@web/images/instagram.png', ['alt' => 'Instagram']) ?>">
+                </div>
+            </div>
 
-<!--            <p class="pull-left">&copy; My Company --><?//= date('Y') ?><!--</p>-->
+            <!--            <p class="pull-left">&copy; My Company --><? //= date('Y') ?><!--</p>-->
         </div>
     </footer>
 </div>
