@@ -206,7 +206,6 @@ ul li {
     width: 120px;
     padding: 5px;
     margin-top: 60px;
-    border-radius: 6px;
     background-color: #f75a2f;
     text-transform: uppercase;
     color: #fff;
@@ -620,7 +619,23 @@ ul li {
     font-size: 15px;
 }
 
-/* products styles */
+.section-content .container-funds .all-funds {
+    display: inline-block;
+    margin-top: 30px;
+    color: #f75a2f;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 1px solid #f75a2f;
+    transition: border-bottom-color, color, .2s;
+}
+
+.section-content .container-funds .all-funds:hover {
+    border-bottom-color: transparent;
+    color: #de522c;
+}
+
+    /* products styles */
 .site-products {
     width: 100%;
     margin: 60px 0 60px 0;
@@ -797,12 +812,26 @@ ul li {
 
 /* footer styles */
 .footer {
-    height: 60px;
-    background-color: #f5f5f5;
-    border-top: 1px solid #ddd;
-    padding-top: 20px;
+    background-color: #333;
+    padding: 60px 0;
 }
 
+.footer .logo-png {
+    display: block;
+    text-align: center;
+    width: 220px;
+    height: 130px;
+}
+
+.footer .container {
+    width: 600px;
+    margin: auto;
+}
+
+.footer .record-btn {
+    float: none;
+    margin-top: 30px;
+}
 
 .jumbotron {
     text-align: center;

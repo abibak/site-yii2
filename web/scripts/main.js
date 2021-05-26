@@ -294,7 +294,7 @@ $(function () {
             close: function () {
                 $modal.fadeOut(350);
 
-                $('.shopping-cart').show();
+                checkNumberCart();
 
                 $('html').css('overflow', 'visible');
                 $('.bg-main').css({'opacity': 0, 'z-index': -1});

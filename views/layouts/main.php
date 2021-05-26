@@ -167,7 +167,7 @@ AppAsset::register($this);
 
             <?= Html::img('@web/images/logo-white.png', ['class' => 'logo-png', 'alt' => 'Logo']) ?>
 
-            <a class="record" href="">Онлайн запись</a>
+            <a class="record" href="#">Онлайн запись</a>
         </div>
     </div>
 
@@ -182,7 +182,12 @@ AppAsset::register($this);
     <!-- footer -->
     <footer class="footer">
         <div class="container">
-            <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+            <?= Html::img('@web/images/logo-white.png', ['class' => 'logo-png', 'alt' => 'Logo']) ?>
+
+            <button class="record-btn">Онлайн запись</button>
+
+
+<!--            <p class="pull-left">&copy; My Company --><?//= date('Y') ?><!--</p>-->
         </div>
     </footer>
 </div>
