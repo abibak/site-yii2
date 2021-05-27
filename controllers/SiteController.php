@@ -95,8 +95,8 @@ class SiteController extends Controller
             die();
         }
 
-        if ($request->isAjax && $request->get('record') !== null) {
-            $data_record = (array)json_decode($request->get('record'));
+        if ($request->isAjax && $request->post('record') !== null) {
+            $data_record = (array)json_decode($request->post('record'));
 
             for ($i = 0; $i < count($data_record['serviceId']); ++$i) {
                 Yii::$app->db->createCommand()->insert('records', [

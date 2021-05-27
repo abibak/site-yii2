@@ -124,6 +124,8 @@ $(function () {
             time: '',
         };
 
+        $('.date-picker').hide();
+
         function openList(selector, container) {
             if (container.is(':hidden')) {
                 $(selector + ' .fa-chevron-down').css({
@@ -211,6 +213,8 @@ $(function () {
 
             $('.selected-master').append('<p>' + listSelectedMaster[0].name + '</p>')
 
+            $('.date-picker').show();
+
             // Отрисовка доступного времени для записи
             // $.ajax({
             //     type: 'GET',
@@ -234,8 +238,6 @@ $(function () {
         });
 
         $('#date').on('blur', function () {
-            // let time = $(this).val();
-
             dataRecordObj.time = $(this).val();
 
             $.ajax({
@@ -275,7 +277,7 @@ $(function () {
                 dataRecordObj.serviceId.length !== 0 && dataRecordObj.time !== '') {
 
                 $.ajax({
-                    type: 'GET',
+                    type: 'POST',
                     url: '/site/index/',
                     data: 'record=' + JSON.stringify(dataRecordObj),
 
@@ -292,8 +294,6 @@ $(function () {
                 });
             }
         });
-
-
 
         return {
             center: function () {
@@ -483,11 +483,24 @@ $(function () {
 
                     success: function (response) {
                         console.log(response);
+
+                        let cloneCart =  $('.modal-cart .container-cart').clone();
+
+                        console.log(cloneCart);
+
+                        $('.modal-cart .container-cart').empty();
+                        $('.modal-cart .container-cart').html('Заказ оформлен');
+
+                        setTimeout(function () {
+                            modalCart.close();
+                            $modalCart.html(cloneCart);
+                        }, 800);
                     }
                 });
             } else {
                 alert('Ошибка');
             }
+
         });
 
         return {
