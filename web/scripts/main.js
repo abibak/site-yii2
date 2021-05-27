@@ -212,23 +212,47 @@ $(function () {
             $('.selected-master').append('<p>' + listSelectedMaster[0].name + '</p>')
 
             // Отрисовка доступного времени для записи
+            // $.ajax({
+            //     type: 'GET',
+            //     url: '/site/index/',
+            //     data: 'id=' + $(this).attr('data-master-id'),
+            //
+            //     success: function (data) {
+            //         let resultObject = JSON.parse(data);
+            //
+            //         $('.block-time').empty();
+            //
+            //         for (let value of resultObject) {
+            //             $('.block-time').append(`<span class="element-time" data-time=${value}>` + value + `</span>`);
+            //         }
+            //     },
+            //
+            //     fail: function () {
+            //         console.log('error');
+            //     }
+            // });
+        });
+
+        $('#date').on('blur', function () {
+            // let time = $(this).val();
+
+            dataRecordObj.time = $(this).val();
+
             $.ajax({
-                type: 'GET',
-                url: '/site/index/',
-                data: 'id=' + $(this).attr('data-master-id'),
+                type: 'POST',
+                url: '/site/index',
+                data: 'data=' + JSON.stringify(dataRecordObj),
 
                 success: function (data) {
                     let resultObject = JSON.parse(data);
+
+                    $('.block-time').empty();
 
                     for (let value of resultObject) {
                         $('.block-time').append(`<span class="element-time" data-time=${value}>` + value + `</span>`);
                     }
                 },
-
-                fail: function () {
-                    console.log('error');
-                }
-            });
+            })
         });
 
         // выбор времени для записи
@@ -240,7 +264,7 @@ $(function () {
 
             $('.result-time-show').html(selectedTime);
             $('.timing').remove();
-        })
+        });
 
         // отправка данных
         $('.model-btn-record').on('click', function (e) {
@@ -268,6 +292,8 @@ $(function () {
                 });
             }
         });
+
+
 
         return {
             center: function () {
@@ -305,9 +331,9 @@ $(function () {
     checkNumberCart();
 
     function checkNumberCart(total) {
-        let productsCart = getProducts();
+        let productsCart = getProducts() || null;
 
-        if (productsCart['products'].length === 0) {
+        if (productsCart === null || productsCart['products'].length === 0) {
             $('.shopping-cart').css('display', 'none');
             return false;
         } else {

@@ -534,6 +534,8 @@ ul li {
     justify-content: center;
     flex-direction: column;
     margin-top: 100vh;
+    margin-right: auto;
+    margin-left: auto;
     background-color: #fff;
     color: #000;
     font-size: 17px;

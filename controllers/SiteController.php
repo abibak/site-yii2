@@ -69,17 +69,18 @@ class SiteController extends Controller
     {
         $request = Yii::$app->request;
 
-        if ($request->isAjax && $request->get('id') !== null) {
-            $id_employee = $request->get('id'); // ajax запрос
+        if ($request->isAjax && /*$request->get('id') !== null || */$request->post('data')) {
+            $post_time = (array)json_decode($request->post('data'));
 
-            $data_records = Records::find()->select('time')->where(['hairdresser_id' => $id_employee])->all();
+            // получение времени
+            $data_records = Records::find()->select('date, time')->where(['hairdresser_id' => $post_time['hairdresserId'], 'date' => $post_time['time']])->all();
+
 
             $employee_schedule = array();
-
             $listTimes = array();
 
             foreach ($data_records as $index => $value) {
-                $listTimes[] = $data_records[$index]['time'];
+                $listTimes[] = $data_records[$index]['time']; // all times
             }
 
             for ($i = 9; $i < 21; ++$i) {
@@ -94,7 +95,7 @@ class SiteController extends Controller
             die();
         }
 
-        if ($request->isAjax) {
+        if ($request->isAjax && $request->get('record') !== null) {
             $data_record = (array)json_decode($request->get('record'));
 
             for ($i = 0; $i < count($data_record['serviceId']); ++$i) {
