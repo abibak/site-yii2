@@ -10,6 +10,10 @@ use yii\base\Model;
  */
 class ContactForm extends Model
 {
+    public static function tableName() {
+        return 'user_request';
+    }
+
     public $name;
     public $email;
     public $subject;
@@ -38,7 +42,11 @@ class ContactForm extends Model
     public function attributeLabels()
     {
         return [
-            'verifyCode' => 'Verification Code',
+            'name' => 'Имя',
+            'email' => 'Почта',
+            'subject' => 'Тема',
+            'body' => 'Описание',
+            'verifyCode' => 'Проверяющий код',
         ];
     }
 

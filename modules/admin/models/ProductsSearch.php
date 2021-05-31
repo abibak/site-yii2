@@ -2,7 +2,6 @@
 
 namespace app\modules\admin\models;
 
-use app\models\Categories;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Products;
@@ -18,7 +17,7 @@ class ProductsSearch extends Products
     public function rules()
     {
         return [
-            [['id', 'category_id', 'discount_id'], 'integer'],
+            [['id', 'category_id'], 'integer'],
             [['name', 'description', 'image'], 'safe'],
             [['price'], 'number'],
         ];
@@ -62,7 +61,6 @@ class ProductsSearch extends Products
         $query->andFilterWhere([
             'id' => $this->id,
             'category_id' => $this->category_id,
-            'discount_id' => $this->discount_id,
             'price' => $this->price,
         ]);
 

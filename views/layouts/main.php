@@ -191,12 +191,13 @@ AppAsset::register($this);
                 <div class="feedback">
                     <span class="footer-span">Пишите нам:</span>
                     <a href="mailto: asv@example.com">example.com</a>
+                    <a href="/site/contact" class="contact-admin">Связь с администрацией</a>
                 </div>
 
                 <div class="socials">
                     <span class="footer-span">Социальные сети</span>
                     <?= Html::img('@web/images/vk.png', ['alt' => 'Vk']) ?>
-                    <?= Html::img('@web/images/instagram.png', ['alt' => 'Instagram']) ?>">
+                    <?= Html::img('@web/images/instagram.png', ['alt' => 'Instagram']) ?>
                 </div>
             </div>
 

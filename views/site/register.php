@@ -25,7 +25,7 @@ $this->title = 'Регистрация';
         <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
         <?= $form->field($model, 'surname') ?>
         <?= $form->field($model, 'patronymic') ?>
-        <?= $form->field($model, 'phone') ?>
+        <?= $form->field($model, 'phone')->input('tel') ?>
         <?= $form->field($model, 'password')->passwordInput() ?>
 
         <?= Html::submitButton('Регистрация', ['class' => 'btn-register']) ?>

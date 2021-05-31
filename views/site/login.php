@@ -24,7 +24,7 @@ $this->title = 'Авторизация';
 
         <?php $form = ActiveForm::begin(['id' => 'form-login', 'enableAjaxValidation' => true]); ?>
 
-        <?= $form->field($model, 'phone') ?>
+        <?= $form->field($model, 'phone')->input('tel') ?>
         <?= $form->field($model, 'password')->passwordInput() ?>
 
         <?= Html::a('Регистрация', ['/site/register'], ['class' => 'main-link']) ?>

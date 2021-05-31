@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\UserRequests;
 use Yii;
 use yii\db\Query;
 use yii\filters\AccessControl;
@@ -158,24 +159,40 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
+
     public function actionContact()
     {
-        $model = new ContactForm();
+        $request = Yii::$app->request;
 
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
+        $model = new UserRequests();
 
-            return $this->refresh();
+        if ($model->load($request->post())) {
+            $model->save();
+            die();
         }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
+
+        return $this->render('contact_admin', ['model' => $model]);
     }
+
+
+//    /**
+//     * Displays contact page.
+//     *
+//     * @return Response|string
+//     */
+//    public function actionContact()
+//    {
+//        $model = new ContactForm();
+//
+//        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+//            Yii::$app->session->setFlash('contactFormSubmitted');
+//
+//            return $this->refresh();
+//        }
+//        return $this->render('contact', [
+//            'model' => $model,
+//        ]);
+//    }
 
     /**
      * Displays about page.

@@ -2,8 +2,7 @@
 
 namespace app\models;
 
-use Yii;
-use yii\base\BaseObject;
+use yii\db\ActiveRecord;
 use yii\db\Query;
 
 /**
@@ -17,7 +16,7 @@ use yii\db\Query;
  *
  * @property Products $product
  */
-class ProductProperties extends \yii\db\ActiveRecord
+class ProductProperties extends ActiveRecord
 {
     /**
      * {@inheritdoc}

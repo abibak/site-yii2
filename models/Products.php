@@ -9,7 +9,6 @@ use Yii;
  *
  * @property int $id
  * @property int|null $category_id
- * @property int|null $discount_id
  * @property string $name
  * @property string $description
  * @property float $price
@@ -35,7 +34,7 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'discount_id'], 'integer'],
+            [['category_id'], 'integer'],
             [['name', 'description', 'price', 'image'], 'required'],
             [['price'], 'number'],
             [['name'], 'string', 'max' => 150],
@@ -53,11 +52,10 @@ class Products extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'category_id' => 'Category ID',
-            'discount_id' => 'Discount ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'price' => 'Price',
-            'image' => 'Image',
+            'name' => 'Название',
+            'description' => 'Описание',
+            'price' => 'Цена',
+            'image' => 'Картинка',
         ];
     }
 

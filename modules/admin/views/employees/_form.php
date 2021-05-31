@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Positions;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -12,11 +14,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <!--    --><? //= $form->field($model, 'position_id')->textInput() ?>
-
     <?= $form->field($model, 'position_id')->dropDownList([
-        5 => 'Администратор',
-        6 => 'Сотрудник',
+        'Выберите позицию' => ArrayHelper::map(Positions::find()->all(), 'id', 'position'),
     ]);
     ?>
 
@@ -34,8 +33,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'salary')->textInput() ?>
 
-    <!--    --><? //= $form->field($model, 'status')->textInput() ?>
-
     <?= $form->field($model, 'status')->dropDownList([
         '0' => 'Не активен',
         '1' => 'Активен',
@@ -43,7 +40,7 @@ use yii\widgets\ActiveForm;
     ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Сохранить'), ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
