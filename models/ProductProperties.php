@@ -27,6 +27,41 @@ class ProductProperties extends ActiveRecord
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['product_id', 'volume', 'amount'], 'required'],
+            [['product_id', 'volume', 'amount'], 'integer'],
+            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Products::className(), 'targetAttribute' => ['product_id' => 'id']],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'product_id' => 'ID товара',
+            'volume' => 'Объем',
+            'amount' => 'Количество',
+        ];
+    }
+
+    /**
+     * Gets query for [[Product]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProductName()
+    {
+        return $this->hasOne(Products::className(), ['id' => 'product_id']);
+    }
+
+    /**
      * Gets query for [[Product]].
      *
      * @return array|bool

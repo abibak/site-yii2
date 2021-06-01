@@ -4,12 +4,12 @@ namespace app\modules\admin\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Orders;
+use app\models\ProductProperties;
 
 /**
- * OrdersSearch represents the model behind the search form of `app\models\Orders`.
+ * ProductsPropertiesSearch represents the model behind the search form of `app\models\ProductProperties`.
  */
-class OrdersSearch extends Orders
+class ProductsPropertiesSearch extends ProductProperties
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,7 @@ class OrdersSearch extends Orders
     public function rules()
     {
         return [
-            [['id', 'user_id', 'product_id', 'quantity_product', 'amount'], 'integer'],
-            [['order_time', 'payment'], 'safe'],
+            [['id', 'product_id', 'volume', 'amount'], 'integer'],
         ];
     }
 
@@ -40,15 +39,12 @@ class OrdersSearch extends Orders
      */
     public function search($params)
     {
-        $query = Orders::find();
+        $query = ProductProperties::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => [
-                'pageSize' => 2,
-            ],
         ]);
 
         $this->load($params);
@@ -62,14 +58,10 @@ class OrdersSearch extends Orders
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
             'product_id' => $this->product_id,
-            'quantity_product' => $this->quantity_product,
-            'order_time' => $this->order_time,
+            'volume' => $this->volume,
             'amount' => $this->amount,
         ]);
-
-        $query->andFilterWhere(['like', 'payment', $this->payment]);
 
         return $dataProvider;
     }

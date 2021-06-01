@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "products".
@@ -18,7 +19,7 @@ use Yii;
  * @property ProductProperties[] $productProperties
  * @property Categories $category
  */
-class Products extends \yii\db\ActiveRecord
+class Products extends ActiveRecord
 {
     /**
      * {@inheritdoc}
