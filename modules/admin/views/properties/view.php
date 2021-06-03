@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             [
-                'label' => 'Тестовое поле',
+                'label' => 'Название',
                 'attribute' => 'productName.name',
             ],
             'volume',

@@ -10,6 +10,7 @@ use yii\grid\GridView;
 $this->title = Yii::t('app', 'Заказы');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="orders-index">
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -28,7 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'Пользователь',
                 'value' => 'user.name',
-                'format' => 'html',
             ],
             [
                 'label' => 'Наименование',
@@ -36,8 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'quantity_product',
             'order_time',
-            'amount',
-            'payment',
 
             [
                 'class' => 'yii\grid\ActionColumn',

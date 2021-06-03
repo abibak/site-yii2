@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Orders */
 
-$this->title = 'Заказ '.$model->id;
+$this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Заказы'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Удалить'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('app', 'Вы действительно хотите удалить этот элемент?'),
+                'confirm' => Yii::t('app', 'Вы действительно хотите удалить этот заказ?'),
                 'method' => 'post',
             ],
         ]) ?>

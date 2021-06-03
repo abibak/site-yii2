@@ -209,16 +209,11 @@ class SiteController extends Controller
      */
     public function actionProducts()
     {
-        date_default_timezone_set('Asia/Novosibirsk');
-
-//        $properties = new ProductProperties();
-//
-//        print_r($properties->getProduct());
-
         $request = Yii::$app->request;
 
         if ($request->isAjax) {
-            $order_time = date('H:i:s');
+            $order_time = date('Y-m-d H:i:s');
+
             $received_data = $request->post();
 
             foreach ($received_data['products'] as $product) {

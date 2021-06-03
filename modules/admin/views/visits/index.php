@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\UsersSearch */
+/* @var $searchModel app\modules\admin\models\VisitsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Пользователи');
+$this->title = Yii::t('app', 'Посещения');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="users-index">
+<div class="visits-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <!--<p>
-        <?/*= Html::a(Yii::t('app', 'Создать пользователя'), ['create'], ['class' => 'btn btn-success']) */?>
-    </p>-->
+    <p>
+        <?= Html::a(Yii::t('app', 'Добавить посещение'), ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -25,24 +25,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'name',
-            'surname',
-            'patronymic',
-            [
-                'label' => 'Позиция',
-                'value' => 'position.position',
-            ],
+
+            'id',
+            'client_id',
+            'date_visit',
+            'payment_amount',
+
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{edit}',
                 'buttons' => [
                     'edit' => function ($url, $model, $key) {
-                        return Html::a('Просмотреть', ['users/view/', 'id' => $model->id]);
+                        return Html::a('Просмотреть', ['visits/view/', 'id' => $model->id]);
                     }
                 ],
             ],
-
-            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 

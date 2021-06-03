@@ -4,19 +4,15 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\UsersSearch */
+/* @var $searchModel app\modules\admin\models\UserRequestSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Пользователи');
+$this->title = Yii::t('app', 'User Requests');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="users-index">
+<div class="user-requests-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <!--<p>
-        <?/*= Html::a(Yii::t('app', 'Создать пользователя'), ['create'], ['class' => 'btn btn-success']) */?>
-    </p>-->
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -26,23 +22,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',
-            'surname',
-            'patronymic',
-            [
-                'label' => 'Позиция',
-                'value' => 'position.position',
-            ],
+            'subject',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{edit}',
                 'buttons' => [
                     'edit' => function ($url, $model, $key) {
-                        return Html::a('Просмотреть', ['users/view/', 'id' => $model->id]);
+                        return Html::a('Просмотреть', ['request/view/', 'id' => $model->id]);
                     }
                 ],
             ],
-
-            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 

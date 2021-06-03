@@ -3,16 +3,16 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Orders;
-use app\modules\admin\models\OrdersSearch;
+use app\models\UserRequests;
+use app\modules\admin\models\UserRequestSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * OrdersController implements the CRUD actions for Orders model.
+ * RequestController implements the CRUD actions for UserRequests model.
  */
-class OrdersController extends Controller
+class RequestController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class OrdersController extends Controller
     }
 
     /**
-     * Lists all Orders models.
+     * Lists all UserRequests models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new OrdersSearch();
+        $searchModel = new UserRequestSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class OrdersController extends Controller
     }
 
     /**
-     * Displays a single Orders model.
+     * Displays a single UserRequests model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,47 +58,15 @@ class OrdersController extends Controller
     }
 
     /**
-     * Creates a new Orders model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Orders();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing Orders model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Orders model based on its primary key value.
+     * Finds the UserRequests model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Orders the loaded model
+     * @return UserRequests the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Orders::findOne($id)) !== null) {
+        if (($model = UserRequests::findOne($id)) !== null) {
             return $model;
         }
 
