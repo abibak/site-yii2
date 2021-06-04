@@ -3,14 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Employee */
+/* @var $model app\models\Records */
 
-$this->title = Yii::t('app', 'Добавление данных');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Employees'), 'url' => ['index']];
+$this->title = 'Create Records';
+$this->params['breadcrumbs'][] = ['label' => 'Records', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="records-create">
 
-<div class="employee-create">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [

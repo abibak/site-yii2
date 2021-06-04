@@ -31,7 +31,27 @@ class Categories extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'category_name' => 'Category Name',
+            'category_name' => 'Категория',
         ];
+    }
+
+    /**
+     * Gets query for [[Products]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProducts()
+    {
+        return $this->hasMany(Products::className(), ['category_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Services]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServices()
+    {
+        return $this->hasMany(Services::className(), ['category_id' => 'id']);
     }
 }

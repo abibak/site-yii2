@@ -34,15 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{edit}',
-                'buttons' => [
-                    'edit' => function ($url, $model, $key) {
-                        return Html::a('Просмотреть', ['users/view/', 'id' => $model->id]);
-                    }
-                ],
+                'template' => '{view}',
             ],
-
-            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 

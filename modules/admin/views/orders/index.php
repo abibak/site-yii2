@@ -36,15 +36,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'quantity_product',
             'order_time',
-
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{edit}',
-                'buttons' => [
-                    'edit' => function ($url, $model, $key) {
-                        return Html::a('Просмотреть', ['orders/view/', 'id' => $model->id]);
-                    }
-                ],
+                'template' => '{view}',
             ],
         ],
     ]); ?>

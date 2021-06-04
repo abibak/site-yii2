@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'category_id')->dropDownList([
-            ArrayHelper::map(Categories::find()->all(), 'id', 'category_name'),
+        'Выберите категорию' => ArrayHelper::map(Categories::find()->all(), 'id', 'category_name'),
     ]);
     ?>
 

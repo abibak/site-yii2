@@ -2,22 +2,24 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\ProductsPropertiesSearch */
+/* @var $searchModel app\modules\admin\models\RecordsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Данные продукции');
+$this->title = 'Records';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="product-properties-index">
+<div class="records-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Добавить свойство'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Records', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
@@ -25,15 +27,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            'id',
+            'client_id',
+            'hairdresser_id',
+            'service_id',
             [
-                'label' => 'Название товара',
-                'value' => 'productName.name'
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}',
             ],
-            'volume',
-            'amount',
-            ['class' => 'yii\grid\ActionColumn',],
         ],
     ]); ?>
 
+    <?php Pjax::end(); ?>
 
 </div>

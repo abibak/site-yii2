@@ -69,4 +69,24 @@ class Employee extends ActiveRecord
             'status' => 'Статус',
         ];
     }
+
+    /**
+     * Gets query for [[Position]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPosition()
+    {
+        return $this->hasOne(Positions::className(), ['id' => 'position_id']);
+    }
+
+    /**
+     * Gets query for [[Records]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRecords()
+    {
+        return $this->hasMany(Records::className(), ['hairdresser_id' => 'id']);
+    }
 }

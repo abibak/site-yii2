@@ -52,7 +52,7 @@ class Products extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'category_id' => 'Category ID',
+            'category_id' => 'Категория',
             'name' => 'Название',
             'description' => 'Описание',
             'price' => 'Цена',

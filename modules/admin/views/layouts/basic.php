@@ -28,14 +28,19 @@ AppAsset::register($this);
             <li class=""><?= Html::a('Главная', ['/admin'], ['class' => 'admin-panel-link']) ?></li>
             <li>Продукция</li>
             <li class=""><?= Html::a('Продукция', ['/admin/products/index'], ['class' => 'admin-panel-link']) ?></li>
+            <li>Услуги</li>
+            <li class=""><?= Html::a('Услуги', ['/admin/services/index'], ['class' => 'admin-panel-link']) ?></li>
             <li>Управление</li>
+            <li class=""><?= Html::a('Записи', ['/admin/records/index'], ['class' => 'admin-panel-link']) ?></li>
             <li class=""><?= Html::a('Сотрудники', ['/admin/employees/index'], ['class' => 'admin-panel-link']) ?></li>
             <li class=""><?= Html::a('Пользователи', ['/admin/users/index'], ['class' => 'admin-panel-link']) ?></li>
             <li class=""><?= Html::a('Заказы', ['/admin/orders/index'], ['class' => 'admin-panel-link']) ?></li>
             <li class=""><?= Html::a('Свойства продукции', ['/admin/properties/index'], ['class' => 'admin-panel-link']) ?></li>
+            <li class=""><?= Html::a('Свойства услуг', ['/admin/tariffs/index'], ['class' => 'admin-panel-link']) ?></li>
             <li class=""><?= Html::a('Посещения', ['/admin/visits/index'], ['class' => 'admin-panel-link']) ?></li>
             <li>Другое</li>
             <li class=""><?= Html::a('Обращения', ['/admin/request/index'], ['class' => 'admin-panel-link']) ?></li>
+            <li class=""><?= Html::a('Вернуться на сайт', ['/'], ['class' => 'admin-panel-link']) ?></li>
         </ul>
     </div>
 

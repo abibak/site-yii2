@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\modules\admin\models\ProductsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Товары');
+$this->title = Yii::t('app', 'Продукция');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="products-index">
@@ -25,21 +25,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'id',
             [
                 'label' => 'Категория',
                 'value' => 'category.category_name'
             ],
             'name',
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{edit}',
-                'buttons' => [
-                    'edit' => function ($url, $model, $key) {
-                        return Html::a('Просмотреть', ['products/view/', 'id' => $model->id]);
-                    }
-                ],
-            ],
+            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 

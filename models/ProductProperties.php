@@ -45,7 +45,7 @@ class ProductProperties extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_id' => 'ID товара',
+            'product_id' => 'Товар',
             'volume' => 'Объем',
             'amount' => 'Количество',
         ];

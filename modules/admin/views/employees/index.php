@@ -29,18 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'surname',
             'patronymic',
-            'phone',
             'status',
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{edit}',
-                'buttons' => [
-                    'edit' => function ($url, $model, $key) {
-                        return Html::a('Просмотреть', ['employees/view/', 'id' => $model->id]);
-                    }
-                ],
-            ],
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

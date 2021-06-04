@@ -236,8 +236,8 @@ class SiteController extends Controller
     public function actionService()
     {
         $query = new Query();
-        $services = $query->from(['e' => 'service_tariffs'])
-            ->join('INNER JOIN', 'services', 'e.service_id = services.id')->all();
+        $services = $query->from(['st' => 'service_tariffs'])
+            ->join('INNER JOIN', 'services', 'st.service_id = services.id')->all();
 
         return $this->render('service', ['services' => $services]);
     }

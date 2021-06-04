@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\ProductProperties */
 
-$this->title = Yii::t('app', 'Обновление свойств товара - {name}', [
+$this->title = Yii::t('app', 'Обновление данных товара - {name}', [
     'name' => Products::find()->select('name')->where(['id' => $model->product_id])->all()[0]['name'],
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Product Properties'), 'url' => ['index']];

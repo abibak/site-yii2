@@ -14,6 +14,15 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?php if (!Yii::$app->request->get()): ?>
+
+        <?= $form->field($model, 'product_id')->dropDownList([
+            'Выберите услугу' => ArrayHelper::map(Products::find()->
+            where('products.id NOT IN (SELECT product_id FROM product_properties)')->all(), 'id', 'name'),
+        ]); ?>
+
+    <?php endif; ?>
+
     <?= $form->field($model, 'volume')->textInput() ?>
 
     <?= $form->field($model, 'amount')->textInput() ?>

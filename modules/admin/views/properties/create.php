@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\ProductProperties */
 
-$this->title = Yii::t('app', 'Create Product Properties');
+$this->title = Yii::t('app', 'Добавить данные о товаре');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Product Properties'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
