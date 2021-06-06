@@ -25,10 +25,8 @@ $(function () {
 
             if (scroll <= 1) {
                 returnValue($sectionContent, 1);
-                // returnValue($returnBg, 1);
             } else {
                 animateScale($sectionContent, 400);
-                // animateScale($returnBg, 600);
             }
         }
     });
@@ -214,27 +212,6 @@ $(function () {
             $('.selected-master').append('<p>' + listSelectedMaster[0].name + '</p>')
 
             $('.date-picker').show();
-
-            // Отрисовка доступного времени для записи
-            // $.ajax({
-            //     type: 'GET',
-            //     url: '/site/index/',
-            //     data: 'id=' + $(this).attr('data-master-id'),
-            //
-            //     success: function (data) {
-            //         let resultObject = JSON.parse(data);
-            //
-            //         $('.block-time').empty();
-            //
-            //         for (let value of resultObject) {
-            //             $('.block-time').append(`<span class="element-time" data-time=${value}>` + value + `</span>`);
-            //         }
-            //     },
-            //
-            //     fail: function () {
-            //         console.log('error');
-            //     }
-            // });
         });
 
         $('#date').on('blur', function () {
@@ -379,6 +356,29 @@ $(function () {
         });
     });
 
+    let resultAjax = true;
+
+    function getResultSuccess(response) {
+        resultAjax = response;
+    }
+
+    function sendProduct(id, count) {
+        return $.ajax({
+            type: 'POST',
+            url: '/site/products',
+            data: 'product=' + JSON.stringify({'count': count, 'id': id}),
+
+            success: function (response) {
+                getResultSuccess(!!response);
+            },
+
+            fail: function () {
+                console.log('fail send');
+            }
+        });
+
+    }
+
     let modalCart = (function () {
         let $modalCart = $('.modal-cart');
         let $product = $('.add-cart');
@@ -424,7 +424,7 @@ $(function () {
             }
         });
 
-// обработка по нажатию на товар
+        // обработка события при добавлении товара в корзину
         $product.on('click', function () {
             let $parent = $(this).parent('.products-block');
 
@@ -436,14 +436,17 @@ $(function () {
             if (cart.products !== undefined) {
                 for (let currentProduct of cart.products) {
                     if (idProduct === currentProduct.id) {
-                        currentProduct.count += 1;
-                        currentProduct.amount = currentProduct.price * currentProduct.count;
-                        cart.amount += priceProduct;
-                        cart.total++;
+                        if (resultAjax) {
+                            currentProduct.count += 1;
+                            currentProduct.amount = currentProduct.price * currentProduct.count;
+                            cart.amount += priceProduct;
+                            cart.total++;
 
-                        setProductData(cart);
-                        checkNumberCart(cart.total);
-                        displayProducts();
+                            sendProduct(currentProduct.id, currentProduct.count);
+                            setProductData(cart);
+                            checkNumberCart(cart.total);
+                            displayProducts();
+                        }
                         return;
                     }
                 }
@@ -464,6 +467,8 @@ $(function () {
             setProductData(cart);
             checkNumberCart(cart.total);
             displayProducts();
+
+            sendProduct(idProduct, 1);
         });
 
         $('.modal-cart .checkout').on('click', function () {
@@ -484,7 +489,7 @@ $(function () {
                     success: function (response) {
                         console.log(response);
 
-                        let cloneCart =  $('.modal-cart .container-cart').clone();
+                        let cloneCart = $('.modal-cart .container-cart').clone();
 
                         console.log(cloneCart);
 
@@ -545,4 +550,5 @@ $(function () {
         }
     })
     ();
-});
+})
+;

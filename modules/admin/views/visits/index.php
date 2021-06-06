@@ -25,20 +25,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'client_id',
             'date_visit',
             'payment_amount',
-
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{edit}',
-                'buttons' => [
-                    'edit' => function ($url, $model, $key) {
-                        return Html::a('Просмотреть', ['visits/view/', 'id' => $model->id]);
-                    }
-                ],
+                'template' => '{view}',
             ],
         ],
     ]); ?>

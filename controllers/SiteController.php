@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\ProductProperties;
 use app\models\UserRequests;
 use Yii;
 use yii\db\Query;
@@ -70,11 +71,12 @@ class SiteController extends Controller
     {
         $request = Yii::$app->request;
 
-        if ($request->isAjax && /*$request->get('id') !== null || */$request->post('data')) {
+        if ($request->isAjax && $request->post('data')) {
             $post_time = (array)json_decode($request->post('data'));
 
             // получение времени
-            $data_records = Records::find()->select('date, time')->where(['hairdresser_id' => $post_time['hairdresserId'], 'date' => $post_time['time']])->all();
+            $data_records = Records::find()->select('date, time')->where(['hairdresser_id' =>
+                $post_time['hairdresserId'], 'date' => $post_time['time']])->all();
 
 
             $employee_schedule = array();
@@ -174,26 +176,6 @@ class SiteController extends Controller
         return $this->render('contact_admin', ['model' => $model]);
     }
 
-
-//    /**
-//     * Displays contact page.
-//     *
-//     * @return Response|string
-//     */
-//    public function actionContact()
-//    {
-//        $model = new ContactForm();
-//
-//        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-//            Yii::$app->session->setFlash('contactFormSubmitted');
-//
-//            return $this->refresh();
-//        }
-//        return $this->render('contact', [
-//            'model' => $model,
-//        ]);
-//    }
-
     /**
      * Displays about page.
      *
@@ -212,8 +194,18 @@ class SiteController extends Controller
         $request = Yii::$app->request;
 
         if ($request->isAjax) {
-            $order_time = date('Y-m-d H:i:s');
+            if ($request->post('product')) {
+                $product = (array)json_decode($request->post('product'));
 
+                $result = ProductProperties::find()->select('amount')->where(['product_id' => $product['id']])->all();
+
+                if ($product['count'] >= $result[0]['amount']) {
+                    return false;
+                }
+                return true;
+            }
+
+            $order_time = date('Y-m-d H:i:s');
             $received_data = $request->post();
 
             foreach ($received_data['products'] as $product) {
@@ -278,11 +270,6 @@ class SiteController extends Controller
         }
 
         return $this->render('register', ['model' => $model]);
-    }
-
-    public function actionProfile()
-    {
-
     }
 }
 
