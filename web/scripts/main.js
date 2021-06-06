@@ -356,7 +356,7 @@ $(function () {
         });
     });
 
-    let resultAjax = true;
+    let resultAjax = false;
 
     function getResultSuccess(response) {
         resultAjax = response;
@@ -369,6 +369,9 @@ $(function () {
             data: 'product=' + JSON.stringify({'count': count, 'id': id}),
 
             success: function (response) {
+                if (!!response === false) {
+                    alert('Максимальное количество товара');
+                }
                 getResultSuccess(!!response);
             },
 
@@ -436,6 +439,8 @@ $(function () {
             if (cart.products !== undefined) {
                 for (let currentProduct of cart.products) {
                     if (idProduct === currentProduct.id) {
+                        sendProduct(currentProduct.id, currentProduct.count);
+
                         if (resultAjax) {
                             currentProduct.count += 1;
                             currentProduct.amount = currentProduct.price * currentProduct.count;
@@ -467,7 +472,6 @@ $(function () {
             setProductData(cart);
             checkNumberCart(cart.total);
             displayProducts();
-
             sendProduct(idProduct, 1);
         });
 
@@ -486,12 +490,8 @@ $(function () {
                     url: '/site/products',
                     data: products,
 
-                    success: function (response) {
-                        console.log(response);
-
+                    success: function () {
                         let cloneCart = $('.modal-cart .container-cart').clone();
-
-                        console.log(cloneCart);
 
                         $('.modal-cart .container-cart').empty();
                         $('.modal-cart .container-cart').html('Заказ оформлен');
