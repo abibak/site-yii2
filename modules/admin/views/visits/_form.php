@@ -15,12 +15,12 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'client_id')->dropDownList([
-            ArrayHelper::map(Users::find()->all(), 'id', 'name'),
+           'Выберите пользователя' => ArrayHelper::map(Users::find()->all(), 'id', 'FullName'),
     ]) ?>
 
     <?= $form->field($model, 'date_visit')->textInput()->input('datetime-local') ?>
 
-    <?= $form->field($model, 'payment_amount')->textInput() ?>
+    <?= $form->field($model, 'payment_amount')->textInput()->input('number') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Добавить'), ['class' => 'btn btn-success']) ?>

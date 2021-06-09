@@ -89,4 +89,14 @@ class Employee extends ActiveRecord
     {
         return $this->hasMany(Records::className(), ['hairdresser_id' => 'id']);
     }
+
+    /**
+     * Gets query for [[FullName]].
+     *
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->name . ' ' . $this->surname . ' ' . $this->patronymic;
+    }
 }

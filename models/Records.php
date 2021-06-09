@@ -52,11 +52,11 @@ class Records extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'client_id' => 'Client ID',
-            'hairdresser_id' => 'Hairdresser ID',
-            'service_id' => 'Service ID',
-            'date' => 'Date',
-            'time' => 'Time',
+            'client_id' => 'Клиент',
+            'hairdresser_id' => 'Парикмахер',
+            'service_id' => 'Услуга',
+            'date' => 'Дата',
+            'time' => 'Время',
         ];
     }
 

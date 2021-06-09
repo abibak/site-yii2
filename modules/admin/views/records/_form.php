@@ -1,5 +1,8 @@
 <?php
 
+use app\models\Employee;
+use app\models\Services;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -12,18 +15,20 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'client_id')->textInput() ?>
+    <?= $form->field($model, 'hairdresser_id')->dropDownList([
+            'Выберите сотрудника' => ArrayHelper::map(Employee::find()->all(), 'id', 'FullName'),
+    ]); ?>
 
-    <?= $form->field($model, 'hairdresser_id')->textInput() ?>
+    <?= $form->field($model, 'service_id')->dropDownList([
+            'Выберите услугу' => ArrayHelper::map(Services::find()->all(), 'id', 'name'),
+    ]); ?>
 
-    <?= $form->field($model, 'service_id')->textInput() ?>
+    <?= $form->field($model, 'date')->textInput()->input('date', ['min' => date('Y-m-d'), 'max' => date('Y-m-t')]) ?>
 
-    <?= $form->field($model, 'date')->textInput() ?>
-
-    <?= $form->field($model, 'time')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'time')->textInput(['maxlength' => true])->input('time', ['min' => '9:00', 'max' => '20:00']) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

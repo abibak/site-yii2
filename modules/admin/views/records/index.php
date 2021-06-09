@@ -8,16 +8,12 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\admin\models\RecordsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Records';
+$this->title = 'Записи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="records-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Records', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -27,10 +23,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'id',
-            'client_id',
-            'hairdresser_id',
-            'service_id',
+            [
+                'label' => 'Имя',
+                'value' => 'client.name'
+            ],
+            [
+                'label' => 'Фамилия',
+                'value' => 'client.name'
+            ],
+            [
+                'label' => 'Парикмахер',
+                'value' => 'hairdresser.name'
+            ],
+            [
+                'label' => 'Услуга',
+                'value' => 'service.name'
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view}',

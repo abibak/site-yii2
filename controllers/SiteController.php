@@ -144,6 +144,7 @@ class SiteController extends Controller
         }
 
         $model->password = '';
+
         return $this->render('login', [
             'model' => $model,
         ]);
@@ -266,7 +267,6 @@ class SiteController extends Controller
                     return $this->redirect('/site/login');
                 }
             }
-            die();
         }
 
         return $this->render('register', ['model' => $model]);

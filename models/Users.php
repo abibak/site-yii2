@@ -37,14 +37,12 @@ class Users extends ActiveRecord
     public function rules()
     {
         return [
-            [['position_id', 'name', 'surname', 'patronymic', 'phone', 'password'], 'required'],
-            [['position_id'], 'integer'],
+            [['name', 'surname', 'patronymic', 'phone', 'password'], 'required', 'message' => 'Заполните поле'],
             [['name'], 'string', 'max' => 150],
             [['surname'], 'string', 'max' => 200],
             [['patronymic'], 'string', 'max' => 250],
             [['phone'], 'string', 'max' => 20],
             [['password'], 'string', 'max' => 120],
-            [['position_id'], 'exist', 'skipOnError' => true, 'targetClass' => Positions::className(), 'targetAttribute' => ['position_id' => 'id']],
         ];
     }
 
@@ -102,5 +100,15 @@ class Users extends ActiveRecord
     public function getVisits()
     {
         return $this->hasMany(Visits::className(), ['client_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[FullName]].
+     *
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->name . ' ' . $this->surname . ' ' . $this->patronymic;
     }
 }
