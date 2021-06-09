@@ -8,11 +8,11 @@ $this->title = 'Админ панель';
     <div class="block-info">
         <div class="content">
 
-            <?php foreach ($data as $data_count => $array): ?>
+            <?php foreach ($data as $name_count => $array): ?>
 
-                <div class="block-content count-users">
+                <div class="block-content">
                     <p class="count" style="font-size: 20px"><b><?= $array['value'] ?></b></p>
-                    <p><?= $array['name'] ?></p>
+                    <p><?= $name_count ?></p>
                 </div>
 
             <?php endforeach; ?>

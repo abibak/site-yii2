@@ -20,23 +20,19 @@ class DefaultController extends Controller
     {
         return $this->render('index', [
             'data' => [
-                'count_users' => [
-                    'name' => 'Количество пользователей',
+                'Количество пользователей' => [
                     'value' => Users::find()->select('id')->count('id')
                 ],
 
-                'count_employees' => [
-                    'name' => 'Количество сотрудников',
+                'Количество сотрудников' => [
                     'value' => Employee::find()->select('id')->count('id')
                 ],
 
-                'count_records' => [
-                    'name' => 'Количество записей',
+                'Количество записей' => [
                     'value' => Records::find()->select('id')->count('id')
                 ],
 
-                'count_orders' => [
-                    'name' => 'Количество заказов',
+                'Количество заказов' => [
                     'value' => Orders::find()->select('id')->count('id')
                 ],
             ],
