@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
            'Выберите пользователя' => ArrayHelper::map(Users::find()->all(), 'id', 'FullName'),
     ]) ?>
 
-    <?= $form->field($model, 'date_visit')->textInput()->input('datetime-local') ?>
+    <?= $form->field($model, 'date_visit')->textInput()->input('datetime-local', ['min' => date('Y-m-d')."T09:00", 'max' => date('Y-m-t')."T20:00"]) ?>
 
     <?= $form->field($model, 'payment_amount')->textInput()->input('number') ?>
 

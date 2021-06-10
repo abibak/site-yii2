@@ -6,6 +6,7 @@ use app\models\Employee;
 use app\models\Orders;
 use app\models\Records;
 use app\models\Users;
+use app\models\Visits;
 use yii\web\Controller;
 
 /**
@@ -21,20 +22,24 @@ class DefaultController extends Controller
         return $this->render('index', [
             'data' => [
                 'Количество пользователей' => [
-                    'value' => Users::find()->select('id')->count('id')
+                    'value' => Users::find()->select('id')->count('id'),
                 ],
 
                 'Количество сотрудников' => [
-                    'value' => Employee::find()->select('id')->count('id')
+                    'value' => Employee::find()->select('id')->count('id'),
                 ],
 
                 'Количество записей' => [
-                    'value' => Records::find()->select('id')->count('id')
+                    'value' => Records::find()->select('id')->count('id'),
                 ],
 
                 'Количество заказов' => [
-                    'value' => Orders::find()->select('id')->count('id')
+                    'value' => Orders::find()->select('id')->count('id'),
                 ],
+
+                'Количество посещений' => [
+                    'value' => Visits::find()->select('id')->count('id'),
+                ]
             ],
         ]);
     }

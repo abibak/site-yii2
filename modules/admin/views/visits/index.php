@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'payment_amount',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view}',
+                'template' => '{view} {delete}',
             ],
         ],
     ]); ?>
