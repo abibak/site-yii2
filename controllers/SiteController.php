@@ -158,20 +158,18 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
-
 
     public function actionContact()
     {
         $request = Yii::$app->request;
-
         $model = new UserRequests();
 
         if ($model->load($request->post())) {
-            $model->save();
-            die();
+            if ($model->save()) {
+                return $this->goHome();
+            }
         }
 
         return $this->render('contact_admin', ['model' => $model]);
@@ -272,10 +270,3 @@ class SiteController extends Controller
         return $this->render('register', ['model' => $model]);
     }
 }
-
-
-
-
-
-
-

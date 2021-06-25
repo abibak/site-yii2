@@ -39,7 +39,7 @@ AppAsset::register($this);
     </div>
 
     <div class="content-modal">
-        <?php if (Yii::$app->user->isGuest) { ?>
+        <?php if (!Yii::$app->user->isGuest) { ?>
 
             <p>Для того, чтобы записаться онлайн,
                 нужно <?= Html::a('войти', '/site/login', ['class' => 'model-link-login']) ?> в аккаунт</p>

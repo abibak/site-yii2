@@ -505,7 +505,6 @@ $(function () {
             } else {
                 alert('Ошибка');
             }
-
         });
 
         return {

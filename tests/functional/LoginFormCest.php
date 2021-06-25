@@ -4,56 +4,33 @@ class LoginFormCest
 {
     public function _before(\FunctionalTester $I)
     {
-        $I->amOnRoute('site/login');
+        $I->amOnRoute('/site/login');
     }
 
-    public function openLoginPage(\FunctionalTester $I)
+    public function useLoginSuccess(\FunctionalTester $I)  // success login
     {
-        $I->see('Login', 'h1');
-
-    }
-
-    // demonstrates `amLoggedInAs` method
-    public function internalLoginById(\FunctionalTester $I)
-    {
-        $I->amLoggedInAs(100);
+        $I->fillField('LoginForm[phone]', '79969349264');
+        $I->fillField('LoginForm[password]', 'admin');
+        $I->click('.btn-login');
+        $I->seeInField('LoginForm[phone]', '79969349264');
+        $I->seeInField('LoginForm[password]', 'admin');
         $I->amOnPage('/');
-        $I->see('Logout (admin)');
+        $I->seeCurrentUrlEquals('/');
     }
 
-    // demonstrates `amLoggedInAs` method
-    public function internalLoginByInstance(\FunctionalTester $I)
+    public function userFailedLoginNoPhone(\FunctionalTester $I)  // login with no phone
     {
-        $I->amLoggedInAs(\app\models\User::findByUsername('admin'));
-        $I->amOnPage('/');
-        $I->see('Logout (admin)');
+        $I->fillField('LoginForm[phone]', '');
+        $I->fillField('LoginForm[password]', 'admin');
+        $I->click('.btn-login');
+        $I->seeInField('LoginForm[phone]', '');
     }
 
-    public function loginWithEmptyCredentials(\FunctionalTester $I)
+    public function userFailedLoginNoPassword(\FunctionalTester $I)  // login with no password
     {
-        $I->submitForm('#login-form', []);
-        $I->expectTo('see validations errors');
-        $I->see('Username cannot be blank.');
-        $I->see('Password cannot be blank.');
-    }
-
-    public function loginWithWrongCredentials(\FunctionalTester $I)
-    {
-        $I->submitForm('#login-form', [
-            'LoginForm[username]' => 'admin',
-            'LoginForm[password]' => 'wrong',
-        ]);
-        $I->expectTo('see validations errors');
-        $I->see('Incorrect username or password.');
-    }
-
-    public function loginSuccessfully(\FunctionalTester $I)
-    {
-        $I->submitForm('#login-form', [
-            'LoginForm[username]' => 'admin',
-            'LoginForm[password]' => 'admin',
-        ]);
-        $I->see('Logout (admin)');
-        $I->dontSeeElement('form#login-form');              
+        $I->fillField('LoginForm[phone]', 79969349264);
+        $I->fillField('LoginForm[password]', '');
+        $I->click('.btn-login');
+        $I->seeInField('LoginForm[password]', '');
     }
 }

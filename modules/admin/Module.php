@@ -20,14 +20,14 @@ class Module extends \yii\base\Module
      */
     public function init()
     {
-        if (!User::getPosition()) {
-            return Yii::$app->response->redirect('/');
-        }
+        //  ВРЕМЕННО ЗАКОММЕНТИРОВАННО, "доступ в админку"!!!11!
+
+        // if (!User::getPosition()) {
+        //     return Yii::$app->response->redirect('/');
+        // }
 
         parent::init();
 
         $this->layout = 'basic';
-
-        // custom initialization code goes here
     }
 }
