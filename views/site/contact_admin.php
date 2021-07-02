@@ -5,10 +5,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 $this->title = 'Связь с администрцией';
-
-/* @var $this yii\web\View */
-/* @var $model app\models\UserRequests */
-/* @var $form ActiveForm */
 ?>
 
 <style>
